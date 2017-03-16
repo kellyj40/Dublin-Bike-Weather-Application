@@ -3,6 +3,7 @@ import json
 import pymysql
 import time
 import sys
+import traceback
 
 NAME="Dublin"
 STATIONS="https://api.jcdecaux.com/vls/v1/stations"
@@ -10,13 +11,16 @@ APIKEY="ad351367503efe038d411efe65ed53d1d53044e8"
 
 
 def main():
+    store(request())
+
+
+def request():
     try:
         r = requests.get(STATIONS, params={"apiKey": APIKEY, "contract": NAME})
-        store(json.loads(r.text))
+        return json.loads(r.text)
     except:
-        print(requests.traceback.format_exc())
-    #time.sleep(5 * 60)
-
+        print(2)
+        print("this is the error", traceback.format_exc())
 
 def store(json_data):
     try:
