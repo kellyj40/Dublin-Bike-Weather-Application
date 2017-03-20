@@ -9,6 +9,21 @@
 <body>
     <h1>Dublin Bikes</h1>
     <div id="home_map"></div>
+    <script>
+        function googleMap()
+        {
+        var canvas= document.getElementById("home_map");
+        var myCenter= new google.maps.LatLng(53.3473,-6.2588)
+        var options= {center: myCenter, zoom:13}
+        var map= new google.maps.Map(canvas,options);
+        var mapLabel=new google.maps.InfoWindow({position: new google.maps.LatLng(53.356, -6.26)});
+        {% for item in locations %}
+            var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
+            var marker = new google.maps.Marker({position: myPosition});
+            marker.setMap(map);
+        {% endfor %}
+        }
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
     <form action="" method="get">
 
