@@ -26,9 +26,9 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
-    <form action="" method="get">
+     <form action="location" method="get">
 
-        <select name="location">
+        <select name="location2">
         {% for item in locations %}
             <option value={{ item[0] }}>{{ item[1] }}</option>
         {% endfor %}
