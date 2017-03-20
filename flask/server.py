@@ -11,8 +11,9 @@ def index():
 @app.route('/location')
 def location_selection():
     path = request.url
-    useless,number = path.split("=")
-    return render_template('dubikes.html', number=number)
+    useless, number = path.split("=")
+    name_of_place, all_data = get_info(number)
+    return render_template('dubikes.html', name_of_place=name_of_place, all_data=all_data)
 
 
 if __name__ == "__main__":
