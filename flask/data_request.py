@@ -8,6 +8,6 @@ def get_locations():
     conn.commit()
     location_info = []
     for row in cur.fetchall():
-        location_info.append(row[1])
+        location_info.append(row)
     cur.close()
     return location_info

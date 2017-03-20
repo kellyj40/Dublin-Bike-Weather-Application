@@ -10,11 +10,15 @@
     <h1>Dublin Bikes</h1>
     <div id="home_map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
-    <ul>
+    <form action="" method="get">
+
+        <select name="location">
         {% for item in locations %}
-            <li>{{ item }}</li>
+            <option value={{ item[0] }}>{{ item[1] }}</option>
         {% endfor %}
-    </ul>
+        </select>
+        <input type="submit" id="place" value="location"/>
+    </form>
 
 
 </body>
