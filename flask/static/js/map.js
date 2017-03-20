@@ -1,6 +1,6 @@
 function googleMap()
 {
-    var canvas= document.getElementById("map");
+    var canvas= document.getElementById("home_map");
     var myCenter= new google.maps.LatLng(53.355122,-6.24922)
     var options= {center: myCenter, zoom:13}
     var map= new google.maps.Map(canvas,options);
