@@ -19,7 +19,6 @@ def request():
         r = requests.get(STATIONS, params={"apiKey": APIKEY, "contract": NAME})
         return json.loads(r.text)
     except:
-        print(2)
         print("this is the error", traceback.format_exc())
 
 def store(json_data):
