@@ -4,6 +4,7 @@ h1{
 }
 #home_map{
     margin: auto;
-    width:1000px;
-    height:500px;
+    width:900px;
+    height:375px;
+    zoom: 120%;
 }

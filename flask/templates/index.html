@@ -21,6 +21,7 @@
             var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
             var marker = new google.maps.Marker({position: myPosition});
             marker.setMap(map);
+            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
         {% endfor %}
         }
     </script>
