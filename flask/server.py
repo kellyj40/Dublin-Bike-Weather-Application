@@ -16,6 +16,6 @@ def location_selection():
     return render_template('dubikes.html', name_of_place=name_of_place, all_data=all_data)
 
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
 

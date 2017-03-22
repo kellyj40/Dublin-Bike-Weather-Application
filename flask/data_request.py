@@ -1,5 +1,8 @@
 import pymysql
 
+def test_function():
+    return "hello"
+
 def get_locations():
     conn = pymysql.connect(host='dublinbikes.clbms7pd8xjt.us-west-2.rds.amazonaws.com', user='goodchat',
                            password='goodchat', db='DublinBikes')
@@ -32,3 +35,4 @@ def get_info(val):
 
     cur.close()
     return place, information
+
