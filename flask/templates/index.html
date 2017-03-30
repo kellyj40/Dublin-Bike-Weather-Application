@@ -11,7 +11,21 @@
 <body>
     <h1>Dublin Bikes</h1>
     <div id="home_map"></div>
+    <form action="location" method="get">
+
+        <select name="location2" onchange="update_map(this)">
+        {% for item in locations %}
+            <option value={{ item[0] }} id="select_place">{{ item[1] }}</option>
+        {% endfor %}
+        </select>
+        <input type="submit" id="place" value="location"/>
+    </form>
     <script>
+        function update_map(place) {
+            var selected_place = place.value;
+            googleMap_place(selected_place)
+        }
+
         function googleMap()
         {
         var canvas= document.getElementById("home_map");
@@ -26,17 +40,45 @@
             marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
         {% endfor %}
         }
+
+        function googleMap_place(place)
+        {
+        {% for item in locations %}
+            if ( {{ item[0] }} == place){
+                    var position_x = {{ item[2] }}
+                    var position_y = {{ item[3] }}
+                    var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
+            }
+        {% endfor %}
+        var canvas= document.getElementById("home_map");
+        var myCenter= new google.maps.LatLng( position_x, position_y)
+        var options= {center: myCenter, zoom:16}
+        var map= new google.maps.Map(canvas,options);
+        var mapLabel=new google.maps.InfoWindow({position: new google.maps.LatLng( position_x, position_y)});
+        {% for item in locations %}
+            if ( {{ item[0] }} == place){
+                    var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
+                    var marker = new google.maps.Marker({position: myPosition});
+                    marker.setMap(map);
+                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+            } else {
+                var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
+                var marker = new google.maps.Marker({position: myPosition});
+                marker.setMap(map);
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+            }
+        {% endfor %}
+
+        }
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
-     <form action="location" method="get">
-
-        <select name="location2">
-        {% for item in locations %}
-            <option value={{ item[0] }}>{{ item[1] }}</option>
-        {% endfor %}
-        </select>
-        <input type="submit" id="place" value="location"/>
-    </form>
-
 </body>
 </html>
+
+
+
+
+
+
