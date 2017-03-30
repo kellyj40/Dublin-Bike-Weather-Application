@@ -1,3 +1,4 @@
+#!/home/ubuntu/anaconda3/bin/python
 import requests
 import json
 import pymysql
