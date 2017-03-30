@@ -7,7 +7,7 @@ def get_locations():
     conn = pymysql.connect(host='dublinbikes.clbms7pd8xjt.us-west-2.rds.amazonaws.com', user='goodchat',
                            password='goodchat', db='DublinBikes')
     cur = conn.cursor()
-    cur.execute("""SELECT number, name, lat, lng FROM Bike_Data GROUP BY number;""")
+    cur.execute("""SELECT number, name, lat, lng FROM Static_Data;""")
     conn.commit()
     location_info = []
     for row in cur.fetchall():
@@ -19,7 +19,7 @@ def get_info(val):
     conn = pymysql.connect(host='dublinbikes.clbms7pd8xjt.us-west-2.rds.amazonaws.com', user='goodchat',
                            password='goodchat', db='DublinBikes')
     cur = conn.cursor()
-    query_string = "SELECT name FROM Bike_Data WHERE number =  '{val}'".format(val=val)
+    query_string = "SELECT name FROM Static_Data WHERE number =  '{val}'".format(val=val)
     cur.execute(query_string)
     conn.commit()
     for row in cur.fetchall():
