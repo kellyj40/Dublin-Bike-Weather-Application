@@ -7,8 +7,8 @@ import traceback
 
 NAME="Dublin"
 STATIONS="https://api.jcdecaux.com/vls/v1/stations"
-with open("/../../API_key.txt", "r") as api_file:
-    APIKEY=api_file.read()
+# with open("/../../API_key.txt", "r") as api_file:
+APIKEY="ad351367503efe038d411efe65ed53d1d53044e8"
 
 def main():
     store(request())
