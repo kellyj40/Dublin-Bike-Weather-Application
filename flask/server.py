@@ -6,7 +6,8 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     locations = get_locations()
-    return render_template('index.html', locations=locations)
+    current_data = current_info()
+    return render_template('index.html', locations=locations, current_data=current_data)
 
 @app.route('/location')
 def location_selection():
@@ -14,7 +15,6 @@ def location_selection():
     useless, number = path.split("=")
     name_of_place, all_data = get_info(number)
     return render_template('dubikes.html', name_of_place=name_of_place, all_data=all_data)
-
 
 if __name__ == "__main__":
     app.run(debug=True)

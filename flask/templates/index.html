@@ -28,6 +28,8 @@
 
         function googleMap()
         {
+        var colours=['red', 'orange', 'green'];
+        var occupancy_indicator=0;
         var canvas= document.getElementById("home_map");
         var myCenter= new google.maps.LatLng(53.3473,-6.2588)
         var options= {center: myCenter, zoom:13}
@@ -37,7 +39,8 @@
             var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
             var marker = new google.maps.Marker({position: myPosition});
             marker.setMap(map);
-            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/'+colours[occupancy_indicator]+'-dot.png')
         {% endfor %}
         }
 
