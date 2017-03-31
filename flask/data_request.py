@@ -15,6 +15,18 @@ def get_locations():
     cur.close()
     return location_info
 
+def get_station_name(station_number):
+    conn = pymysql.connect(host='dublinbikes.clbms7pd8xjt.us-west-2.rds.amazonaws.com', user='goodchat',
+                           password='goodchat', db='DublinBikes')
+    cur = conn.cursor()
+    query_string = "SELECT name FROM Static_Data WHERE number =  '{val}'".format(val=station_number)
+    cur.execute(query_string)
+    conn.commit()
+    for row in cur.fetchall():
+        place = row
+        break
+    return place
+
 def get_info(val):
     conn = pymysql.connect(host='dublinbikes.clbms7pd8xjt.us-west-2.rds.amazonaws.com', user='goodchat',
                            password='goodchat', db='DublinBikes')
