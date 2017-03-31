@@ -70,9 +70,14 @@
         {% for item in locations %}
             if ( {{ item[0] }} == place){
                     var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
+                    var myPosition2= new google.maps.LatLng({{ item[2] }} +.0004, {{ item[3] }})
                     var marker = new google.maps.Marker({position: myPosition});
                     marker.setMap(map);
                     marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+                    var mapLab=new google.maps.InfoWindow({position: myPosition2});
+                    mapLab.setContent("Today's conditions");
+                    mapLab.setMap(map);
+
             } else {
                 var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
                 var marker = new google.maps.Marker({position: myPosition});
