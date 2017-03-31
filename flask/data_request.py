@@ -41,7 +41,7 @@ def current_info():
                            password='goodchat', db='DublinBikes')
     cur = conn.cursor()
     data=[]
-    query_string = "SELECT * FROM Bike_Data GROUP BY number ORDER BY last_update;"
+    query_string = "SELECT * FROM (SELECT * FROM DublinBikes.Bike_Data ORDER BY last_update DESC) as mytable GROUP BY mytable.number;"
     cur.execute(query_string)
     conn.commit()
     data={} #creating python dictionary to store the data for each stop number
