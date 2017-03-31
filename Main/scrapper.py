@@ -20,6 +20,7 @@ with open("../../API_key.txt", "r") as api_file:
             r = requests.get(STATIONS, params={"apiKey": APIKEY, "contract": NAME})
             with open('backup_data.txt', 'a') as file: #storing data in backup text file
                 file.write(r.text)
+                file.close()
             return json.loads(r.text)
         except:
             print("this is the error", traceback.format_exc())
