@@ -22,6 +22,7 @@
         <input type="submit" id="place" value="More info"/>
     </form>
     <script>
+
         function update_map(place) {
             var selected_place = place.value;
             googleMap_place(selected_place)
@@ -54,10 +55,30 @@
                 size: new google.maps.Size(71,71),
                 origin: new google.maps.Point(0,0),
                 anchor: new google.maps.Point(17,34),
-                scaledSize: new google.maps.Size(30,30)
+                scaledSize: new google.maps.Size(35,35)
                 };
             marker.setIcon(image)
+            marker.addListener('click', function() {
+                googleMap_place( {{ item[0] }} );
+            });
         {% endfor %}
+        if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            title: 'Your position'
+        });
+    }, function() {
+        alert("r");
+    });
+} else {
+  alert("yo");
+}
         }
 
         function googleMap_place(place)
@@ -96,7 +117,7 @@
                         size: new google.maps.Size(71,71),
                         origin: new google.maps.Point(0,0),
                         anchor: new google.maps.Point(17,34),
-                        scaledSize: new google.maps.Size(50,50)
+                        scaledSize: new google.maps.Size(55,55)
                         };
                     marker.setIcon(image)
                     var mapLab=new google.maps.InfoWindow({position: myPosition2});
@@ -113,14 +134,13 @@
                     size: new google.maps.Size(71,71),
                     origin: new google.maps.Point(0,0),
                     anchor: new google.maps.Point(17,34),
-                    scaledSize: new google.maps.Size(30,30)
+                    scaledSize: new google.maps.Size(35,35)
                     };
                 marker.setIcon(image);
             }
         {% endfor %}
 
         }
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
 </body>
