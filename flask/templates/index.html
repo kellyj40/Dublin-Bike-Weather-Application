@@ -14,11 +14,12 @@
     <form action="location" method="get">
 
         <select name="location2" onchange="update_map(this)">
+            <option value="" selected disabled>Please select a location</option>
         {% for item in locations %}
             <option value={{ item[0] }} id="select_place">{{ item[1] }}</option>
         {% endfor %}
         </select>
-        <input type="submit" id="place" value="location"/>
+        <input type="submit" id="place" value="More info"/>
     </form>
     <script>
         function update_map(place) {
@@ -86,8 +87,8 @@
                 occupancy_indicator=2;
             }
             if ( {{ item[0] }} == place){
-                    var myPosition= new google.maps.LatLng({{ item[2] }}+.0002, {{ item[3] }}-.0001)
-                    var myPosition2= new google.maps.LatLng({{ item[2] }} +.0004, {{ item[3] }})
+                    var myPosition= new google.maps.LatLng({{ item[2] }}+.0002, {{ item[3] }}-.00015)
+                    var myPosition2= new google.maps.LatLng({{ item[2] }} +.0005, {{ item[3] }})
                     var marker = new google.maps.Marker({position: myPosition});
                     marker.setMap(map);
                     var image= {
