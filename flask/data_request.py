@@ -49,3 +49,5 @@ def current_info():
         data[str(row[0])]=row[1:]
     cur.close()
     return data
+
+print(current_info()["1"][6])
