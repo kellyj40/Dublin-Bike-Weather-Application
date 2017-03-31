@@ -67,15 +67,17 @@
         var options= {center: myCenter, zoom:16}
         var map= new google.maps.Map(canvas,options);
         var mapLabel=new google.maps.InfoWindow({position: new google.maps.LatLng( position_x, position_y)});
+        <!--alert({{ locations[0] }});-->
         {% for item in locations %}
             if ( {{ item[0] }} == place){
-                    var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
-                    var myPosition2= new google.maps.LatLng({{ item[2] }} +.0004, {{ item[3] }})
+                    var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }});
+                    var myPosition2= new google.maps.LatLng({{ item[2] }} +.0004, {{ item[3] }});
                     var marker = new google.maps.Marker({position: myPosition});
                     marker.setMap(map);
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
                     var mapLab=new google.maps.InfoWindow({position: myPosition2});
-                    mapLab.setContent("Today's conditions");
+                    var street = ("{{ item[1] }} <br> Total bikes: {{ current_data[item[0]|string][4] }} <br> Empty Stands: {{ current_data[item[0]|string][5] }} <br> Available Bikes: {{ current_data[item[0]|string][6] }}");
+                    mapLab.setContent(street);
                     mapLab.setMap(map);
 
             } else {
