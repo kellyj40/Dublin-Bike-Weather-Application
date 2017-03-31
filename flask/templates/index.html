@@ -54,7 +54,7 @@
                 size: new google.maps.Size(71,71),
                 origin: new google.maps.Point(0,0),
                 anchor: new google.maps.Point(17,34),
-                scaledSize: new google.maps.Size(25,25)
+                scaledSize: new google.maps.Size(30,30)
                 };
             marker.setIcon(image)
         {% endfor %}
@@ -100,7 +100,8 @@
                         };
                     marker.setIcon(image)
                     var mapLab=new google.maps.InfoWindow({position: myPosition2});
-                    mapLab.setContent("Today's conditions");
+                    var street = ("{{ item[1] }} <br> Total bikes: {{ current_data[item[0]|string][4] }} <br> Empty Stands: {{ current_data[item[0]|string][5] }} <br> Available Bikes: {{ current_data[item[0]|string][6] }}");
+                    mapLab.setContent(street);
                     mapLab.setMap(map);
 
             } else {
@@ -112,7 +113,7 @@
                     size: new google.maps.Size(71,71),
                     origin: new google.maps.Point(0,0),
                     anchor: new google.maps.Point(17,34),
-                    scaledSize: new google.maps.Size(25,25)
+                    scaledSize: new google.maps.Size(30,30)
                     };
                 marker.setIcon(image);
             }
