@@ -52,7 +52,6 @@ def current_info():
     conn = pymysql.connect(host='dublinbikes.clbms7pd8xjt.us-west-2.rds.amazonaws.com', user='goodchat',
                            password='goodchat', db='DublinBikes')
     cur = conn.cursor()
-    data=[]
     query_string = "SELECT * FROM (SELECT * FROM DublinBikes.Bike_Data ORDER BY last_update DESC) as mytable GROUP BY mytable.number;"
     cur.execute(query_string)
     conn.commit()
