@@ -45,7 +45,7 @@ class database_queries:
 
     def current_info(self):
         cur = self.conn.cursor()
-        query_string = "SELECT * FROM (SELECT * FROM DublinBikes.Bike_Data ORDER BY last_update DESC) as mytable GROUP BY mytable.number;"
+        query_string = "SELECT * FROM Current_Data;"
         cur.execute(query_string)
         self.conn.commit()
         data={} #creating python dictionary to store the data for each stop number
