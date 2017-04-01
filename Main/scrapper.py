@@ -31,7 +31,6 @@ with open("API_key.txt", "r") as api_file:
         except:
             pass
 
-
     def connect(conn, json_data):
         cur = conn.cursor()
         try:
@@ -39,16 +38,21 @@ with open("API_key.txt", "r") as api_file:
             `bonus` VARCHAR(45),`status` VARCHAR(45),`contract_name` VARCHAR(45),`bike_stands` INT(11),`available_bike_stands`
              INT(11),`available_bikes` INT(11),`last_update` BIGINT(20), PRIMARY KEY (`number`,`last_update`));""")
             conn.commit()
+        except:
+            print("Bike_Data query failed")
+        try:
             cur.execute("""CREATE TABLE IF NOT EXISTS `DublinBikes`.`Static_Data`(`number` INT NOT NULL,`name` VARCHAR(45),
                     `address` VARCHAR(45),`lat` VARCHAR(45),`lng` VARCHAR(45), PRIMARY KEY (`number`));""")
             conn.commit()
+        except:
+            print("Static_Data query failed")
+        try:
             cur.execute("""CREATE TABLE IF NOT EXISTS `DublinBikes`.`Current_Data`(`number` INT NOT NULL,`banking` VARCHAR(45),
             `bonus` VARCHAR(45),`status` VARCHAR(45),`contract_name` VARCHAR(45),`bike_stands` INT(11),`available_bike_stands`
             INT(11),`available_bikes` INT(11),`last_update` BIGINT(20), PRIMARY KEY (`number`));""")
             conn.commit()
         except:
-            print("SQL query failed")
-            pass
+            print("Current_Data query failed")
         for i in range(0, len(json_data)):
             query = """INSERT INTO Bike_Data(number, banking, bonus, status, contract_name, bike_stands, available_bike_stands,
              available_bikes, last_update) VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s");"""
@@ -71,17 +75,31 @@ with open("API_key.txt", "r") as api_file:
                                      json_data[i]['bike_stands'], json_data[i]['available_bike_stands'],
                                      json_data[i]['available_bikes'], json_data[i]['last_update']))
                 conn.commit()
+            except pymysql.err.IntegrityError:
+                continue
+            except:
+                file = open('errors_store.txt', 'a')
+                file.write(str(sys.exc_info()[0]) + '\n')
+                file.close()
+            try:
                 cur.execute(query3 % (json_data[i]['number'],
                                       json_data[i]['banking'],
                                       json_data[i]['bonus'], json_data[i]['status'], json_data[i]['contract_name'],
                                       json_data[i]['bike_stands'], json_data[i]['available_bike_stands'],
                                       json_data[i]['available_bikes'], json_data[i]['last_update']))
                 conn.commit()
+            except pymysql.err.IntegrityError:
+                continue
+            except:
+                file = open('errors_store.txt', 'a')
+                file.write(str(sys.exc_info()[0]) + '\n')
+                file.close()
+            try:
                 cur.execute(query2 % (json_data[i]['number'],
                                       json_data[i]['name'],
                                       json_data[i]['address'], json_data[i]['position']['lat'], json_data[i]['position']['lng']))
                 conn.commit()
-            except pymysql.err.IntegrityError as e:
+            except pymysql.err.IntegrityError:
                 continue
             except:
                 file = open('errors_store.txt', 'a')
