@@ -53,10 +53,11 @@
         userMarker.setMap(map)
       }
 
-     <!--function fail(){-->
+     function fail(){
         <!--alert(navigator.geolocation.error.message);-->
          <!--alert('navigator.geolocation failed, may not be supported');-->
-     <!--}-->
+         return true;
+     }
 
         locate();
         {% for item in locations %}
