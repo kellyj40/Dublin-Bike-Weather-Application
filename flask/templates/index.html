@@ -21,6 +21,8 @@
         </select>
         <input type="submit" id="place" value="More info"/>
     </form>
+        <div id = "error"></div>
+
     <script>
 
         function update_map(place) {
@@ -44,8 +46,12 @@
                 scaledSize: new google.maps.Size(35,35)
                 };
         function locate(){
-        navigator.geolocation.getCurrentPosition(initialize,fail, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
-    }
+if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(initialize,fail, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
+                }
+            else {
+                      document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
+            }    }
 
     function initialize(position) {
         var myPosition3= new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
