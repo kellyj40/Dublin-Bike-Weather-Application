@@ -59,9 +59,9 @@
         userMarker.setMap(map)
       }
 
-     function fail(position){
+     function fail(positionError){
         <!--alert(navigator.geolocation.error.message);-->
-         alert(position);
+         alert(positionError.message);
          return true;
      }
 
