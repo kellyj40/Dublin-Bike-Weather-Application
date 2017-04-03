@@ -46,7 +46,7 @@
                 scaledSize: new google.maps.Size(35,35)
                 };
         function locate(){
-if (navigator.geolocation){
+            if (navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(initialize,fail, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
                 }
             else {
@@ -59,9 +59,9 @@ if (navigator.geolocation){
         userMarker.setMap(map)
       }
 
-     function fail(){
+     function fail(position){
         <!--alert(navigator.geolocation.error.message);-->
-         <!--alert('navigator.geolocation failed, may not be supported');-->
+         alert(position);
          return true;
      }
 
