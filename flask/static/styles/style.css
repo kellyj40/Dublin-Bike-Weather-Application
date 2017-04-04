@@ -2,10 +2,15 @@ h1{
     color:blue;
     text-align:center;
 }
+
 #home_map{
     margin: auto;
     width:900px;
     height:375px;
+}
+
+#home_button{
+    display:none;
 }
 
 

@@ -10,7 +10,7 @@
 
 <body>
     <h1>Dublin Bikes</h1>
-    <A HREF="javascript:history.go(0)">Home</A>
+    <A HREF="javascript:history.go(0)" id="home_button">Home</A>
     <div id="home_map"></div>
     <form action="location" method="get">
 
@@ -80,6 +80,8 @@
             }
 
             function changeMap(place){ <!-- changing map based on "place" location being selected -->
+                var x = document.getElementById('home_button');
+                x.style.display = 'block';
                 map.setZoom(16);
                 {% for item in locations %}
                     if( {{ item[0] }} == place.toString()){
