@@ -16,9 +16,8 @@ def location_selection():
     db_queries_locations = database_queries()
     path = request.url
     useless, number_of_station = path.split("=")
-    name_of_place = db_queries_locations.get_station_name(number_of_station)
-    most_recent_data = db_queries_locations.current_info()
-    all_data=most_recent_data[number_of_station]
+    name_of_place,most_recent_data = db_queries_locations.get_station_name(number_of_station)  # Get name from static
+    all_data = most_recent_data[number_of_station]
     return render_template('dubikes.html', name_of_place=name_of_place, all_data=all_data)
 
 # @app.route('/location')

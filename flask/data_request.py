@@ -43,10 +43,17 @@ class database_queries:
         query_string = "SELECT name FROM Static_Data WHERE number =  '{val}'".format(val=station_number)
         cur.execute(query_string)
         self.conn.commit()
+        place = cur.fetchall()[0]
+        query_string = "SELECT * FROM Current_Data;"
+        cur.execute(query_string)
+        self.conn.commit()
+        data = {}  # creating python dictionary to store the data for each stop number
         for row in cur.fetchall():
-            place = row
-            break
-        return place
+            data[str(row[0])] = list(row[1:])
+            data[str(row[0])][7] = int(
+                datetime.datetime.fromtimestamp(int(time.time()) - (data[str(row[0])][7] / 1000)).strftime('%M'))
+        cur.close()
+        return place, data
 
     def current_info(self):
         cur = self.conn.cursor()
@@ -59,3 +66,15 @@ class database_queries:
             data[str(row[0])][7] = int(datetime.datetime.fromtimestamp(int(time.time())-(data[str(row[0])][7]/1000)).strftime('%M'))
         cur.close()
         return data
+
+    # def current_info_of_location(self, station_num):
+    #     cur = self.conn.cursor()
+    #     query_string = "SELECT * FROM Current_Data Where;"
+    #     cur.execute(query_string)
+    #     self.conn.commit()
+    #     data = {} #creating python dictionary to store the data for each stop number
+    #     for row in cur.fetchall():
+    #         data[str(row[0])] = list(row[1:])
+    #         data[str(row[0])][7] = int(datetime.datetime.fromtimestamp(int(time.time())-(data[str(row[0])][7]/1000)).strftime('%M'))
+    #     cur.close()
+    #     return data
