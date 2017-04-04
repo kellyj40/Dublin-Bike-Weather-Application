@@ -1,7 +1,7 @@
 import pymysql
 import datetime
 import time
-
+import closest_neighbour
 
 class database_queries:
 
@@ -40,20 +40,26 @@ class database_queries:
 
     def get_station_name(self, station_number):
         cur = self.conn.cursor()
-        query_string = "SELECT name FROM Static_Data WHERE number =  '{val}'".format(val=station_number)
+        #Get name and position of location
+        query_string = "SELECT number, name, lat, lng FROM Static_Data WHERE number =  '{val}'".format(val=station_number)
         cur.execute(query_string)
-        self.conn.commit()
-        place = cur.fetchall()[0]
-        query_string = "SELECT * FROM Current_Data;"
+        #self.conn.commit()
+        place = cur.fetchall()
+        query_string = "SELECT number, name, lat, lng FROM Static_Data;"
         cur.execute(query_string)
-        self.conn.commit()
+        all_locations = cur.fetchall()
+        neighbours = closest_neighbour.find_closest_neighbours(place,all_locations)
+        #Get current data
+        query_string = "SELECT * FROM Current_Data WHERE number =  '{val}'".format(val=station_number)
+        cur.execute(query_string)
+        #self.conn.commit()
         data = {}  # creating python dictionary to store the data for each stop number
-        for row in cur.fetchall():
-            data[str(row[0])] = list(row[1:])
-            data[str(row[0])][7] = int(
-                datetime.datetime.fromtimestamp(int(time.time()) - (data[str(row[0])][7] / 1000)).strftime('%M'))
+        row  = cur.fetchall()[0]
+        data[str(row[0])] = list(row[1:])
+        #Calculate the last update time
+        data[str(row[0])][7] = int(datetime.datetime.fromtimestamp(int(time.time()) - (data[str(row[0])][7] / 1000)).strftime('%M'))
         cur.close()
-        return place, data
+        return place[0], data, neighbours
 
     def current_info(self):
         cur = self.conn.cursor()
