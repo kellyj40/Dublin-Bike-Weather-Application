@@ -13,7 +13,7 @@
     <div id="home_map"></div>
     <form action="location" method="get">
 
-        <select name="location2" onchange="update_map(this)">
+        <select name="location2" onchange="googleMap.changeMap(this.value)">
             <option value="" selected disabled>Please select a location</option>
         {% for item in locations %}
             <option value={{ item[0] }} id="select_place">{{ item[1] }}</option>
@@ -21,145 +21,74 @@
         </select>
         <input type="submit" id="place" value="More info"/>
     </form>
-        <div id = "error"></div>
-
     <script>
-
-        function update_map(place) {
-            var selected_place = place.value;
-            googleMap_place(selected_place)
-        }
-
         function googleMap(){
-        var colours=['red', 'orange', 'green'];
-        var occupancy_indicator=0;
-        var canvas= document.getElementById("home_map");
-        var myCenter= new google.maps.LatLng(53.3473,-6.2588)
-        var options= {center: myCenter, zoom:13}
-        var map= new google.maps.Map(canvas,options);
-        var mapLabel=new google.maps.InfoWindow({position: new google.maps.LatLng(53.356, -6.26)});
-        var image2= {
-                url:'static/images/current.png',
-                size: new google.maps.Size(71,71),
-                origin: new google.maps.Point(0,0),
-                anchor: new google.maps.Point(17,34),
-                scaledSize: new google.maps.Size(35,35)
-                };
-        function locate(){
-            if (navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(initialize,fail, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
-                }
-            else {
-                      document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
-            }    }
+            var canvas= document.getElementById("home_map");
+            var myCenter= new google.maps.LatLng(53.3473,-6.2588);
+            var options= {center: myCenter, zoom:13};
+            var map= new google.maps.Map(canvas,options);
+            var markerColour="";
+            var markers=[];
 
-    function initialize(position) {
-        var myPosition3= new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-        var userMarker = new google.maps.Marker({position: myPosition3, icon: image2});
-        userMarker.setMap(map)
-      }
+            setMarkers(-1);
 
-     function fail(positionError){
-        <!--alert(navigator.geolocation.error.message);-->
-         alert(positionError.message);
-         return true;
-     }
+            function setMarkers(selected){ <!--Function for adding markers to map based on occupancy and selected status-->
+                {% for item in locations %} <!-- setting the colour for the markers based on number of available bikes -->
+                    if( {{ current_data[item[0]|string][6] }} ==0){
+                        markerColour="red";
+                    }
+                    else if( {{ current_data[item[0]|string][6] }} <5){
+                        markerColour="orange";
+                    }
+                    else{
+                        markerColour="green";
+                    }
 
-        locate();
-        {% for item in locations %}
-            if( {{ current_data[item[0]|string][6] }} ==0){
-                occupancy_indicator=0;
-            }
-            else if( {{ current_data[item[0]|string][6] }} <5){
-                occupancy_indicator=1;
-            }
-            else{
-                occupancy_indicator=2;
-            }
-            var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
-            var marker = new google.maps.Marker({position: myPosition});
-            marker.setMap(map);
-            var image= {
-                url:'static/images/'+colours[occupancy_indicator]+'_bike.png',
-                size: new google.maps.Size(71,71),
-                origin: new google.maps.Point(0,0),
-                anchor: new google.maps.Point(17,34),
-                scaledSize: new google.maps.Size(35,35)
-                };
-            marker.setIcon(image)
-            marker.addListener('click', function() {
-                googleMap_place( {{ item[0] }} );
-            });
-        {% endfor %}
-        }
-
-        function googleMap_place(place)
-        {
-        {% for item in locations %}
-            if ( {{ item[0] }} == place){
-                    var position_x = {{ item[2] }}
-                    var position_y = {{ item[3] }}
-                    var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
-            }
-        {% endfor %}
-        var canvas= document.getElementById("home_map");
-        var myCenter= new google.maps.LatLng( position_x, position_y)
-        var options= {center: myCenter, zoom:16}
-        var map= new google.maps.Map(canvas,options);
-        var mapLabel=new google.maps.InfoWindow({position: new google.maps.LatLng( position_x, position_y)});
-        var colours=['red', 'orange', 'green'];
-        var occupancy_indicator=0;
-        {% for item in locations %}
-             if( {{ current_data[item[0]|string][6] }} ==0){
-                occupancy_indicator=0;
-            }
-            else if( {{ current_data[item[0]|string][6] }} <5){
-                occupancy_indicator=1;
-            }
-            else{
-                occupancy_indicator=2;
-            }
-            if ( {{ item[0] }} == place){
-                    var myPosition= new google.maps.LatLng({{ item[2] }}+.0002, {{ item[3] }}-.00015)
-                    var myPosition2= new google.maps.LatLng({{ item[2] }} +.0005, {{ item[3] }})
+                    var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }}); <!-- initialising marker -->
                     var marker = new google.maps.Marker({position: myPosition});
                     marker.setMap(map);
-                    var image= {
-                        url:'static/images/'+colours[occupancy_indicator]+'_bike.png',
-                        size: new google.maps.Size(71,71),
+                    if( {{ item[0] }} == selected){
+                        var image= { <!-- setting size to be bigger than unselected markers -->
+                        url:'static/images/'+markerColour+'_bike.png',
                         origin: new google.maps.Point(0,0),
                         anchor: new google.maps.Point(17,34),
-                        scaledSize: new google.maps.Size(55,55)
+                        scaledSize: new google.maps.Size(65,65)
                         };
-                    marker.setIcon(image)
-                    var mapLab=new google.maps.InfoWindow({position: myPosition2});
-                    var street = ("{{ item[1] }} <br> Total bikes: {{ current_data[item[0]|string][4] }} <br> Empty Stands: {{ current_data[item[0]|string][5] }} <br> Available Bikes: {{ current_data[item[0]|string][6] }}");
-                    mapLab.setContent(street);
-                    mapLab.setMap(map);
-
-            } else {
-                var myPosition= new google.maps.LatLng({{ item[2] }}, {{ item[3] }})
-                var marker = new google.maps.Marker({position: myPosition});
-                marker.setMap(map);
-                var image= {
-                    url:'static/images/'+colours[occupancy_indicator]+'_bike.png',
-                    size: new google.maps.Size(71,71),
-                    origin: new google.maps.Point(0,0),
-                    anchor: new google.maps.Point(17,34),
-                    scaledSize: new google.maps.Size(35,35)
-                    };
-                marker.setIcon(image);
+                    }
+                    else{
+                        var image= { <!-- setting custom image to take place of marker, based on markerColour from above -->
+                        url:'static/images/'+markerColour+'_bike.png',
+                        origin: new google.maps.Point(0,0),
+                        anchor: new google.maps.Point(17,34),
+                        scaledSize: new google.maps.Size(35,35)
+                        };
+                    }
+                    markers.push(marker); <!--adding marker to array so it can be removed later -->
+                    marker.setIcon(image);
+                    marker.addListener("click", function() { changeMap( {{ item[0] }} ); }); <!-- calling changeMap() on click of marker -->
+                {% endfor %}
             }
-        {% endfor %}
 
+            function clearMarkers(){ <!-- Function for removing all previous map markers -->
+                while(markers[0]){
+                    markers.pop().setMap(null);
+                }
+            }
+
+            function changeMap(place){ <!-- changing map based on "place" location being selected -->
+                map.setZoom(16);
+                {% for item in locations %}
+                    if( {{ item[0] }} == place.toString()){
+                        var newCenter=new google.maps.LatLng( {{ item[2] }}, {{ item[3] }} );
+                        map.setCenter(newCenter);
+                        }
+                {% endfor %}
+                clearMarkers();
+                setMarkers(place);
+            }
+            googleMap.changeMap=changeMap;
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
 </body>
 </html>
-
-
-
-
-
-
