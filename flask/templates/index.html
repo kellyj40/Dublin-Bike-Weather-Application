@@ -23,10 +23,12 @@
     </form>
     <div id = "text"></div>
     <script>
+
         function googleMap(){
             var canvas= document.getElementById("home_map");
             var myCenter= new google.maps.LatLng(53.3473,-6.2588);
-            var options= {center: myCenter, zoom:13};
+            var myStyles =[{featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }]}];
+            var options= {center: myCenter, zoom:13, styles: myStyles};
             var map= new google.maps.Map(canvas,options);
             var markerColour="";
             var markers=[];
