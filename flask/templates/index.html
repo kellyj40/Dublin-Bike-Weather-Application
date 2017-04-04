@@ -13,7 +13,7 @@
     <div id="home_map"></div>
     <form action="location" method="get">
 
-        <select name="location2" onchange="googleMap.changeMap(this.value)">
+        <select name="location2" onchange="googleMap.changeMap(this.value); textBox(this.value)">
             <option value="" selected disabled>Please select a location</option>
         {% for item in locations %}
             <option value={{ item[0] }} id="select_place">{{ item[1] }}</option>
@@ -21,6 +21,7 @@
         </select>
         <input type="submit" id="place" value="More info"/>
     </form>
+    <div id = "text"></div>
     <script>
         function googleMap(){
             var canvas= document.getElementById("home_map");
@@ -65,7 +66,7 @@
                     }
                     markers.push(marker); <!--adding marker to array so it can be removed later -->
                     marker.setIcon(image);
-                    marker.addListener("click", function() { changeMap( {{ item[0] }} ); }); <!-- calling changeMap() on click of marker -->
+                    marker.addListener("click", function() { changeMap( {{ item[0] }} ); textBox( {{  item[0]  }} );}); <!-- calling changeMap() on click of marker -->
                 {% endfor %}
             }
 
@@ -87,6 +88,14 @@
                 setMarkers(place);
             }
             googleMap.changeMap=changeMap;
+        }
+        function textBox(x){
+            {% for item in locations %}
+		if ( {{ item[0] }} == x ){
+		    var update = {{ current_data[item[0]|string][7] }} + " MINUTES AGO";
+                    var current = "TOTAL BIKES: " + {{ current_data[item[0]|string][4] }} + "<br> AVAILABLE BIKES: "+ {{ current_data[item[0]|string][5] }} + "<br> FREE BIKE STANDS: "+ {{ current_data[item[0]|string][6] }} + "<br> LAST UPDATED " + update;
+                    document.getElementById("text").innerHTML = "SELECTED LOCATION: {{ item[1] }} <br>" + current;
+                }            {% endfor %}
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>

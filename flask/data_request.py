@@ -1,5 +1,10 @@
 import pymysql
+import datetime
+import time
+
+
 class database_queries:
+
     def __init__(self):
         self.conn = pymysql.connect(host='dublinbikes.clbms7pd8xjt.us-west-2.rds.amazonaws.com', user='goodchat',
                                password='goodchat', db='DublinBikes')
@@ -48,8 +53,9 @@ class database_queries:
         query_string = "SELECT * FROM Current_Data;"
         cur.execute(query_string)
         self.conn.commit()
-        data={} #creating python dictionary to store the data for each stop number
+        data = {} #creating python dictionary to store the data for each stop number
         for row in cur.fetchall():
-            data[str(row[0])]=row[1:]
+            data[str(row[0])] = list(row[1:])
+            data[str(row[0])][7] = int(datetime.datetime.fromtimestamp(int(time.time())-(data[str(row[0])][7]/1000)).strftime('%M'))
         cur.close()
         return data
