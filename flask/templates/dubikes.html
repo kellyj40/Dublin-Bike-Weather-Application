@@ -36,6 +36,12 @@
         <h1> Invalid place </h1>
     {% endif %}
 
+    <div id="closest_neighbours">
+        <a href="/"> home </a>
+        <p> Closest stand from {{ name_of_place[1] }}</p>
+        <a href="/location?location2={{ neighbours[0] }}"> {{ neighbours[1] }} </a>
+    </div>
+
 
     <table id="station_table">
     {% for row in all_data%}
