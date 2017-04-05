@@ -8,7 +8,9 @@ def index():
     db_queries_home = database_queries()
     locations = db_queries_home.get_locations()
     current_data = db_queries_home.current_info()
-    return render_template('index.html', locations=locations, current_data=current_data)
+    weather = db_queries_home.weather_info()
+
+    return render_template('index.html', locations=locations, current_data=current_data, weather=weather)
 
 
 @app.route('/location')

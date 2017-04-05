@@ -73,6 +73,20 @@ class database_queries:
         cur.close()
         return data
 
+    def weather_info(self):
+        cur = self.conn.cursor()
+        query_string = "SELECT * FROM weather_Data;"
+        cur.execute(query_string)
+        self.conn.commit()
+        data = {}  # creating python dictionary to store the data for each stop number
+        for row in cur.fetchall():
+            data[str(row[0])] = list(row[1:])
+            data[str(row[0])][4] = int(
+                datetime.datetime.fromtimestamp(int(time.time()) - (data[str(row[0])][4])).strftime('%M'))
+        cur.close()
+        return data
+
+
     # def current_info_of_location(self, station_num):
     #     cur = self.conn.cursor()
     #     query_string = "SELECT * FROM Current_Data Where;"

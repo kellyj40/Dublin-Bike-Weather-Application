@@ -14,4 +14,10 @@ h1{
 }
 
 
-
+#weather {
+    color: green;
+    float: right;
+    position: fixed;
+    top: 8px;
+    right: 8px;
+}
