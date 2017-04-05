@@ -12,6 +12,7 @@ with open("API_key.txt", "r") as api_file:
     APIKEY=api_file.read()
     def main():
         store(request())
+        main2()
     def request():
         try:
             r = requests.get(STATIONS, params={"apiKey": APIKEY, "contract": NAME})
