@@ -39,7 +39,9 @@
     <div id="closest_neighbours">
         <a href="/"> home </a>
         <p> Closest stand from {{ name_of_place[1] }}</p>
-        <a href="/location?location2={{ neighbours[0] }}"> {{ neighbours[1] }} </a>
+        <a href="/location?location2={{ neighbours[0][0] }}">1 - {{ neighbours[0][1] }} </a><br>
+        <a href="/location?location2={{ neighbours[1][0] }}">2 - {{ neighbours[1][1] }} </a><br>
+        <a href="/location?location2={{ neighbours[2][0] }}">3 - {{ neighbours[2][1] }} </a>
     </div>
 
 
