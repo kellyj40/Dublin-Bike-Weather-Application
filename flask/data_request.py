@@ -11,7 +11,7 @@ class database_queries:
 
     def get_locations(self):
         cur = self.conn.cursor()
-        cur.execute("""SELECT number, name, lat, lng FROM Static_Data;""")
+        cur.execute("""SELECT number, name, lat, lng FROM Static_Data ORDER BY name;""")
         self.conn.commit()
         location_info = []
         for row in cur.fetchall():
