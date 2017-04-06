@@ -56,7 +56,7 @@ class database_queries:
         data = {}  # creating python dictionary to store the data for each stop number
         row  = cur.fetchall()[0]
         data[str(row[0])] = list(row[1:])
-        #Calculate the last update time
+        #Calculate the last update
         data[str(row[0])][7] = int(datetime.datetime.fromtimestamp(int(time.time()) - (data[str(row[0])][7] / 1000)).strftime('%M'))
         cur.close()
         return place[0], data, neighbours
@@ -86,7 +86,23 @@ class database_queries:
         cur.close()
         return data
 
+    def historical_data(self, station_number):
+        cur = self.conn.cursor()
+        query_string = "SELECT * FROM Bike_Data WHERE number =  '{val}'".format(val=station_number)
+        cur.execute(query_string)
+        self.conn.commit()
+        data=[]
+        for row in cur.fetchall():
+            # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
+            data.append([row[8],row[7]])
+        return data
 
+
+
+
+
+
+        # creating
     # def current_info_of_location(self, station_num):
     #     cur = self.conn.cursor()
     #     query_string = "SELECT * FROM Current_Data Where;"
