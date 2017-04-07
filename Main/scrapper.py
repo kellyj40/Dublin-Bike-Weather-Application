@@ -9,7 +9,7 @@ import datetime
 
 NAME="Dublin"
 STATIONS="https://api.jcdecaux.com/vls/v1/stations"
-with open("API_key.txt", "r") as api_file:
+with open("/home/ubuntu/Dublin-Bike-Weather-Application/Main/API_key.txt", "r") as api_file:
     APIKEY=api_file.read()
     def main():
         store(request())
@@ -17,7 +17,7 @@ with open("API_key.txt", "r") as api_file:
     def request():
         try:
             r = requests.get(STATIONS, params={"apiKey": APIKEY, "contract": NAME})
-            with open('backup_data.txt', 'a') as file: #storing data in backup text file
+            with open('/home/ubuntu/Dublin-Bike-Weather-Application/Main/backup_data.txt', 'a') as file: #storing data in backup text file
                 file.write(r.text)
                 file.close()
             return json.loads(r.text)
