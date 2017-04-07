@@ -8,7 +8,7 @@ def add_day_hour():
 	conn = pymysql.connect(host='dublinbikes.clbms7pd8xjt.us-west-2.rds.amazonaws.com', user='goodchat',
                                password='goodchat', db='DublinBikes')
 	cur = conn.cursor()
-	query_string = "SELECT number, last_update FROM DublinBikes.Bike_Data WHERE number > 3 AND number < 10;"
+	query_string = "SELECT number, last_update FROM DublinBikes.Bike_Data WHERE number > 9;"
 	cur.execute(query_string)
 	conn.commit()
 	
