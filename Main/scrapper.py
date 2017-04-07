@@ -5,6 +5,7 @@ import pymysql
 import time
 import sys
 import traceback
+import datetime
 
 NAME="Dublin"
 STATIONS="https://api.jcdecaux.com/vls/v1/stations"
@@ -37,7 +38,7 @@ with open("API_key.txt", "r") as api_file:
         try:
             cur.execute("""CREATE TABLE IF NOT EXISTS `DublinBikes`.`Bike_Data`(`number` INT NOT NULL,`banking` VARCHAR(45),
             `bonus` VARCHAR(45),`status` VARCHAR(45),`contract_name` VARCHAR(45),`bike_stands` INT(11),`available_bike_stands`
-             INT(11),`available_bikes` INT(11),`last_update` BIGINT(20), PRIMARY KEY (`number`,`last_update`));""")
+             INT(11),`available_bikes` INT(11),`last_update` BIGINT(20), `weekday` INT(11), `hour` INT(11), PRIMARY KEY (`number`,`last_update`));""")
             conn.commit()
         except:
             print("Bike_Data query failed")
@@ -56,7 +57,7 @@ with open("API_key.txt", "r") as api_file:
             print("Current_Data query failed")
         for i in range(0, len(json_data)):
             query = """INSERT INTO Bike_Data(number, banking, bonus, status, contract_name, bike_stands, available_bike_stands,
-             available_bikes, last_update) VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s");"""
+             available_bikes, last_update, weekday, hour) VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s");"""
             query3 = """INSERT INTO DublinBikes.Current_Data(number, banking, bonus, status, contract_name, bike_stands, available_bike_stands,
                             available_bikes, last_update) VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s")
                             ON DUPLICATE KEY UPDATE
@@ -74,7 +75,9 @@ with open("API_key.txt", "r") as api_file:
                                      json_data[i]['banking'],
                                      json_data[i]['bonus'], json_data[i]['status'], json_data[i]['contract_name'],
                                      json_data[i]['bike_stands'], json_data[i]['available_bike_stands'],
-                                     json_data[i]['available_bikes'], json_data[i]['last_update']))
+                                     json_data[i]['available_bikes'], json_data[i]['last_update'],
+                                     datetime.datetime.fromtimestamp(json_data[i]['last_update']/ 1000).weekday(),
+                                     datetime.datetime.fromtimestamp(json_data[i]['last_update'] / 1000).hour))
                 conn.commit()
             except pymysql.err.IntegrityError:
                 continue

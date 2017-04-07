@@ -12,15 +12,14 @@
     <h1>Dublin Bikes</h1>
     <A HREF="javascript:history.go(0)" id="home_button">Home</A>
     <div id="home_map"></div>
-    <form action="location" method="get">
-
+    <form>
         <select name="location2" onchange="googleMap.changeMap(this.value); textBox(this.value)">
             <option value="" selected disabled>Please select a location</option>
         {% for item in locations %}
             <option value={{ item[0] }} id="select_place">{{ item[1] }}</option>
         {% endfor %}
         </select>
-        <input type="submit" id="place" value="More info"/>
+        <!--<input type="submit" id="place" value="More info"/>-->
     </form>
     <div id = "text"></div>
     <div id = "weather"></div>
@@ -99,14 +98,15 @@
         }
         function textBox(x){
             {% for item in locations %}
-		if ( {{ item[0] }} == x ){
-		    var update = {{ current_data[item[0]|string][7] }} + " MINUTES AGO";
+                if ( {{ item[0] }} == x ){
+                    var update = {{ current_data[item[0]|string][7] }} + " MINUTES AGO";
                     var current = "TOTAL BIKES: " + {{ current_data[item[0]|string][4] }} + "<br> AVAILABLE BIKES: "+ {{ current_data[item[0]|string][6] }} + "<br> FREE BIKE STANDS: "+ {{ current_data[item[0]|string][5] }} + "<br> LAST UPDATED " + update;
-                    document.getElementById("text").innerHTML = "SELECTED LOCATION: {{ item[1] }} <br>" + current;
-                }            {% endfor %}
+                    document.getElementById("text").innerHTML = "SELECTED LOCATION: {{ item[1] }} <br>" + current+ "<form action='/location' method='get'><select><option value= {{ item[0] }} > {{ item[1] }}</option></select><input type='submit'/></form>";
+                    }
+            {% endfor %}
         }
-        var weatherArray = [{{ weather["Dublin"][0] }}, "{{ weather["Dublin"][1] }}", "{{ weather["Dublin"][2] }}", "{{ weather["Dublin"][3] }}", "{{ weather["Dublin"][4] }}"]
-        weather({{ weather|tojson }});
+
+        <!--weather({{ weather|tojson }});-->
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
