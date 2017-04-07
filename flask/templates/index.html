@@ -24,6 +24,8 @@
     </form>
     <div id = "text"></div>
     <div id = "weather"></div>
+    <script type="text/javascript", src="{{ url_for('static', filename='js/weather.js') }}"></script>
+
     <script>
 
         function googleMap(){
@@ -103,10 +105,9 @@
                     document.getElementById("text").innerHTML = "SELECTED LOCATION: {{ item[1] }} <br>" + current;
                 }            {% endfor %}
         }
-        var icon = "<img src='http://openweathermap.org/img/w/{{ weather["Dublin"][3] }}.png'>";
-        var weather = icon + "<br> {{ weather["Dublin"][2] }} <br>Temperature: " + {{ weather["Dublin"][0] }}
-         + "oC<br> Windspeed: {{ weather["Dublin"][1] }} m/s<br> Last Update: {{ weather["Dublin"][4] }} minutes ago";
-        document.getElementById("weather").innerHTML = weather;
+        var weatherArray = [{{ weather["Dublin"][0] }}, "{{ weather["Dublin"][1] }}", "{{ weather["Dublin"][2] }}", "{{ weather["Dublin"][3] }}", "{{ weather["Dublin"][4] }}"]
+        weather(weatherArray);
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
 </body>
