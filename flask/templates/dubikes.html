@@ -30,7 +30,7 @@
       function drawHistoricalChart() {
       var historicalData = new google.visualization.DataTable();
       <!--historicalData.addColumn("datetime", "Date and Time");-->
-      historicalData.addColumn("number", "Date and Time");
+      historicalData.addColumn("number", "Hour");
       historicalData.addColumn("number", "Available Bikes");
       historicalData.addRows( {{ historical_data }} );
 

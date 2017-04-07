@@ -83,18 +83,19 @@ class database_queries:
             data[str(row[0])] = list(row[1:])
             data[str(row[0])][4] = int(
                 datetime.datetime.fromtimestamp(int(time.time()) - (data[str(row[0])][4])).strftime('%M'))
-        cur.close()
+        # cur.close()
         return data
 
     def historical_data(self, station_number):
+        day = datetime.datetime.today().weekday()
         cur = self.conn.cursor()
-        query_string = "SELECT * FROM Bike_Data WHERE number =  '{val}'".format(val=station_number)
+        query_string = "SELECT hour, AVG(available_bikes) FROM Bike_Data WHERE number = '{0}' AND weekday = {1} GROUP BY hour;".format(station_number, day)
         cur.execute(query_string)
         self.conn.commit()
         data=[]
         for row in cur.fetchall():
             # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
-            data.append([row[8],row[7]])
+            data.append([row[0], int(row[1])])
         return data
 
 
