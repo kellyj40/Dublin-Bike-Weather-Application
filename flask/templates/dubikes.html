@@ -7,21 +7,41 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
+      google.charts.setOnLoadCallback(drawCurrentChart);
+      function drawCurrentChart() {
+        var currentData = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
           ['Empty',     {{ all_data[5] }} ],
           ['Is available',      {{ all_data[6] }}],
         ]);
 
-        var options = {
+        var currentOptions = {
           title: '{{ name_of_place[0] }} current availability',
           is3D: true,
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
+        var currentChart = new google.visualization.PieChart(document.getElementById('current_chart'));
+        currentChart.draw(currentData, currentOptions);
+      }
+
+      google.charts.load("historical", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawHistoricalChart);
+
+      function drawHistoricalChart() {
+      var historicalData = new google.visualization.DataTable();
+      <!--historicalData.addColumn("datetime", "Date and Time");-->
+      historicalData.addColumn("number", "Date and Time");
+      historicalData.addColumn("number", "Available Bikes");
+      historicalData.addRows( {{ historical_data }} );
+
+       var historicalOptions = {
+          title: 'Historical Occupancy',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart'));
+        historicalChart.draw(historicalData, historicalOptions);
       }
     </script>
 
@@ -52,7 +72,8 @@
         </tr>
     {% endfor %}
     </table>
-    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+    <div id="current_chart"></div>
+    <div id="historical_chart"></div>
     </script>
 
 </body>

@@ -21,3 +21,13 @@ h1{
     top: 8px;
     right: 8px;
 }
+
+#current_chart{
+    width:50%;
+    left:0;
+}
+
+#historical_chart{
+    width:50%;
+    right:0;
+}
