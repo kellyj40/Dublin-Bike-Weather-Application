@@ -1,8 +1,8 @@
  function weather(x){
-    var icon = "<img src='http://openweathermap.org/img/w/"+x[3]+".png'>";
-    var temp = x[0]- 273.15;
-    var weather = icon + "<br> "+ x[2] + "<br>Temperature: " + temp +
-    "<sup>o</sup>C<br> Windspeed: "+x[1] +" m/s<br> Last Update: "+x[4]+" minutes ago";
+    var icon = "<img src='http://openweathermap.org/img/w/"+x['Dublin'][3]+".png'>";
+    var temp = parseInt(x['Dublin'][0]- 273.15);
+    var weather = icon + "<br> "+ x['Dublin'][2] + "<br>Temperature: " + temp +
+    "<sup>o</sup>C<br> Windspeed: "+x['Dublin'][1] +" m/s<br> Last Update: "+x['Dublin'][4]+" minutes ago";
 
     document.getElementById("weather").innerHTML = weather;
 }

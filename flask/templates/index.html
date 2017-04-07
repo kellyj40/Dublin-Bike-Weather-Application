@@ -106,7 +106,7 @@
                 }            {% endfor %}
         }
         var weatherArray = [{{ weather["Dublin"][0] }}, "{{ weather["Dublin"][1] }}", "{{ weather["Dublin"][2] }}", "{{ weather["Dublin"][3] }}", "{{ weather["Dublin"][4] }}"]
-        weather(weatherArray);
+        weather({{ weather|tojson }});
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
