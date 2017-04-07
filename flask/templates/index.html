@@ -101,7 +101,7 @@
             {% for item in locations %}
 		if ( {{ item[0] }} == x ){
 		    var update = {{ current_data[item[0]|string][7] }} + " MINUTES AGO";
-                    var current = "TOTAL BIKES: " + {{ current_data[item[0]|string][4] }} + "<br> AVAILABLE BIKES: "+ {{ current_data[item[0]|string][5] }} + "<br> FREE BIKE STANDS: "+ {{ current_data[item[0]|string][6] }} + "<br> LAST UPDATED " + update;
+                    var current = "TOTAL BIKES: " + {{ current_data[item[0]|string][4] }} + "<br> AVAILABLE BIKES: "+ {{ current_data[item[0]|string][6] }} + "<br> FREE BIKE STANDS: "+ {{ current_data[item[0]|string][5] }} + "<br> LAST UPDATED " + update;
                     document.getElementById("text").innerHTML = "SELECTED LOCATION: {{ item[1] }} <br>" + current;
                 }            {% endfor %}
         }

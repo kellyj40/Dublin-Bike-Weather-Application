@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d4b83c4-1f2a-4be5-8515-83c68cc05747" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flask/data_request.py" afterPath="$PROJECT_DIR$/flask/data_request.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flask/server.py" afterPath="$PROJECT_DIR$/flask/server.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flask/static/styles/style.css" afterPath="$PROJECT_DIR$/flask/static/styles/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flask/templates/dubikes.html" afterPath="$PROJECT_DIR$/flask/templates/dubikes.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flask/templates/index.html" afterPath="$PROJECT_DIR$/flask/templates/index.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,11 +17,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flask/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1425">
-              <caret line="57" column="59" lean-forward="true" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
+            <state relative-caret-position="447">
+              <caret line="103" column="218" lean-forward="false" selection-start-line="103" selection-start-column="218" selection-end-line="103" selection-end-column="218" />
               <folding />
             </state>
           </provider>
@@ -46,7 +42,7 @@
       <file leaf-file-name="dubikes.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flask/templates/dubikes.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
+            <state relative-caret-position="800">
               <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
               <folding />
             </state>
@@ -63,10 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data_request.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="data_request.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flask/data_request.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
+            <state relative-caret-position="780">
               <caret line="96" column="39" lean-forward="false" selection-start-line="96" selection-start-column="39" selection-end-line="96" selection-end-column="39" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -99,19 +95,19 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Main/scrapper.py" />
-        <option value="$PROJECT_DIR$/flask/templates/index.html" />
         <option value="$PROJECT_DIR$/flask/server.py" />
         <option value="$PROJECT_DIR$/flask/static/styles/style.css" />
         <option value="$PROJECT_DIR$/flask/templates/dubikes.html" />
         <option value="$PROJECT_DIR$/flask/data_request.py" />
+        <option value="$PROJECT_DIR$/flask/templates/index.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="161" />
     <option name="y" value="-11" />
-    <option name="width" value="2154" />
-    <option name="height" value="1318" />
+    <option name="width" value="1770" />
+    <option name="height" value="1102" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -413,7 +409,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="161" y="-11" width="2154" height="1318" extended-state="6" />
+    <frame x="161" y="-11" width="1770" height="1102" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20450282" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -462,6 +458,58 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/flask/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="57" column="59" lean-forward="false" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flask/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="22" column="75" lean-forward="false" selection-start-line="22" selection-start-column="75" selection-end-line="22" selection-end-column="75" />
+          <folding>
+            <element signature="e#11#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flask/templates/dubikes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="800">
+          <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flask/static/styles/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="775">
+          <caret line="31" column="12" lean-forward="false" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flask/data_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="69" lean-forward="true" selection-start-line="1" selection-start-column="69" selection-end-line="1" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/flask/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -545,14 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flask/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1425">
-          <caret line="57" column="59" lean-forward="true" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flask/static/styles/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="775">
@@ -581,7 +621,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flask/templates/dubikes.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
+        <state relative-caret-position="800">
           <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
           <folding />
         </state>
@@ -589,11 +629,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flask/data_request.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
+        <state relative-caret-position="780">
           <caret line="96" column="39" lean-forward="false" selection-start-line="96" selection-start-column="39" selection-end-line="96" selection-end-column="39" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flask/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="103" column="218" lean-forward="false" selection-start-line="103" selection-start-column="218" selection-end-line="103" selection-end-column="218" />
+          <folding />
         </state>
       </provider>
     </entry>
