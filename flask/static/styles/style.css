@@ -2,6 +2,9 @@ h1{
     color:blue;
     text-align:center;
 }
+#name_of_stands{
+    text-transform: capitalize;
+}
 
 #home_map{
     margin: auto;

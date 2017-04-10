@@ -32,6 +32,11 @@ def find_closest_neighbours(place, neighbours):
             elif d<closest3:
                 closest3 = d
                 details_neighbour[2] = location
+    
+    for i in range(3):
+        details_neighbour[i] = list(details_neighbour[i])
+        var = details_neighbour[i][1]
+        details_neighbour[i][1] = var.lower()
     return details_neighbour
 
 #####Formula taken from http://stackoverflow.com/questions/1502590/calculate-distance-between-two-points-in-google-maps-v3

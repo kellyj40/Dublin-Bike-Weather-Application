@@ -16,7 +16,7 @@
         ]);
 
         var currentOptions = {
-          title: '{{ name_of_place[0] }} current availability',
+          title: '{{ name_of_place[1] }} current availability',
           is3D: true,
         };
 
@@ -49,35 +49,43 @@
 </head>
 <body>
 
-    <!--<h1>Dublin bikes</h1>-->
+    <h1>Dublin Bikes</h1>
     {% if name_of_place %}
-        <h1> {{ name_of_place[1] }} </h1>
+        <h1> <span id="name_of_stands"> {{ name_of_place[1] }} </span> </h1>
     {% else %}
         <h1> Invalid place </h1>
     {% endif %}
 
     <div id="closest_neighbours">
         <a href="/"> home </a>
-        <p> Closest stand from {{ name_of_place[1] }}</p>
-        <a href="/location?location2={{ neighbours[0][0] }}">1 - {{ neighbours[0][1] }} </a><br>
-        <a href="/location?location2={{ neighbours[1][0] }}">2 - {{ neighbours[1][1] }} </a><br>
-        <a href="/location?location2={{ neighbours[2][0] }}">3 - {{ neighbours[2][1] }} </a>
+        <p> Closest stand from <span id="name_of_stands"> {{ name_of_place[1] }} </span> </p>
+        <a href="/location?location2={{ neighbours[0][0] }}"> <span id="name_of_stands"> 1 - {{ neighbours[0][1] }} </span></a><br>
+        <a href="/location?location2={{ neighbours[1][0] }}"> <span id="name_of_stands"> 2 - {{ neighbours[1][1] }} </span></a><br>
+        <a href="/location?location2={{ neighbours[2][0] }}"> <span id="name_of_stands"> 3 - {{ neighbours[2][1] }} </span></a>
     </div>
 
 
-    <!--<table id="station_table">-->
-    <!--{% for row in all_data%}-->
-        <!--<tr>-->
-          <!--<td>{{ row }}</td>-->
-        <!--</tr>-->
-    <!--{% endfor %}-->
-    <!--</table>-->
-    <div id ="chart_container">
+    <table id="station_table">
+         <tr>
+            <td>Credit Card Facility</td>
+            <td>{{ all_data[0] }}</td>
+         </tr>
+         <tr>
+            <td>Total Stands</td>
+            <td>{{ all_data[4] }}</td>
+         </tr>
+         <tr>
+            <td>Stands Available</td>
+            <td>{{ all_data[5] }}</td>
+         </tr>
+        <tr>
+            <td>Bikes Available</td>
+            <td>{{ all_data[6] }}</td>
+        </tr>
+    </table>
     <div id="current_chart"></div>
     <div id="historical_chart"></div>
-        </div>
+    </script>
+
 </body>
 </html>
-
-
-
