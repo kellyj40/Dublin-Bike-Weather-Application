@@ -11,6 +11,20 @@
 <body>
     <h1>Dublin Bikes</h1>
     <A HREF="javascript:history.go(0)" id="home_button">Home</A>
+    <table>
+        <tr>
+            <td><img src='static/images/green_bike.png' class="legend_image"></td>
+            <td>More than 5 available bikes</td>
+        </tr>
+        <tr>
+            <td><img src='static/images/orange_bike.png' class="legend_image"></td>
+            <td>Less than 5 bikes available</td>
+        </tr>
+        <tr>
+            <td><img src='static/images/red_bike.png' class="legend_image"></td>
+            <td>No available bikes</td>
+        </tr>
+    </table>
     <div id="home_map"></div>
     <form action="location" method="get">
         <select id = "setopt" name="location2" onchange="googleMap.changeMap(this.value); textBox(this.value)">

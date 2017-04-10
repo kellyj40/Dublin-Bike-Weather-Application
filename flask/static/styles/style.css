@@ -2,7 +2,7 @@ h1{
     color:blue;
     text-align:center;
 }
-.name_of_stands{
+#name_of_stands{
     text-transform: capitalize;
 }
 
@@ -48,5 +48,8 @@ h1{
     float: left;
     width:25%;
 }
-
+.legend_image{
+    height:30px;
+    width:30px;
+}
 

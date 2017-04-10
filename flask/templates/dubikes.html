@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ name_of_place[1] }}</title>
+    <title id="name_of_stands">{{ name_of_place[1] }}</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -55,9 +55,23 @@
     {% else %}
         <h1> Invalid place </h1>
     {% endif %}
+    <a href="/"> home </a>
+    <table>
+        <tr>
+            <td><img src='static/images/green_bike.png' class="legend_image"></td>
+            <td>More than 5 available bikes</td>
+        </tr>
+        <tr>
+            <td><img src='static/images/orange_bike.png' class="legend_image"></td>
+            <td>Less than 5 bikes available</td>
+        </tr>
+        <tr>
+            <td><img src='static/images/red_bike.png' class="legend_image"></td>
+            <td>No available bikes</td>
+        </tr>
+    </table>
     <div id="home_map"></div>
     <div id="closest_neighbours">
-        <a href="/"> home </a>
         <p> Closest stand from <span id="name_of_stands"> {{ name_of_place[1] }} </span> </p>
         <a href="/location?location2={{ neighbours[0][0] }}"> <span id="name_of_stands"> 1 - {{ neighbours[0][1] }} </span></a><br>
         <a href="/location?location2={{ neighbours[1][0] }}"> <span id="name_of_stands"> 2 - {{ neighbours[1][1] }} </span></a><br>
