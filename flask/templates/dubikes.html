@@ -49,7 +49,7 @@
 </head>
 <body>
 
-    <h1>Dublin bikes</h1>
+    <!--<h1>Dublin bikes</h1>-->
     {% if name_of_place %}
         <h1> {{ name_of_place[1] }} </h1>
     {% else %}
@@ -65,17 +65,17 @@
     </div>
 
 
-    <table id="station_table">
-    {% for row in all_data%}
-        <tr>
-          <td>{{ row }}</td>
-        </tr>
-    {% endfor %}
-    </table>
+    <!--<table id="station_table">-->
+    <!--{% for row in all_data%}-->
+        <!--<tr>-->
+          <!--<td>{{ row }}</td>-->
+        <!--</tr>-->
+    <!--{% endfor %}-->
+    <!--</table>-->
+    <div id ="chart_container">
     <div id="current_chart"></div>
     <div id="historical_chart"></div>
-    </script>
-
+        </div>
 </body>
 </html>
 

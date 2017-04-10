@@ -35,3 +35,21 @@ h1{
 #place {
     display: none;
 }
+
+#closest_neighbour {
+
+}
+
+#station_table {
+
+}
+
+#current_chart {
+    float: left;
+
+}
+
+#historical_chart {
+    float: left;
+}
+
