@@ -24,7 +24,8 @@ def location_selection():
     name_of_place = list(name_of_place)
     place_lower = name_of_place[1]
     name_of_place[1] = place_lower.lower()
-    return render_template('dubikes.html', name_of_place=name_of_place, all_data=all_data, neighbours = neighbours, historical_data=historical_data)
+    locations = db_queries_locations.get_locations()
+    return render_template('dubikes.html', name_of_place=name_of_place, all_data=all_data, neighbours = neighbours, historical_data=historical_data, locations=locations)
 
 # @app.route('/location')
 # def location_selection():
@@ -35,4 +36,3 @@ def location_selection():
 
 if __name__ == "__main__":
     app.run(debug=True)
-

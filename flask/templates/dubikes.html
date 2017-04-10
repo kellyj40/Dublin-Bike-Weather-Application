@@ -55,7 +55,7 @@
     {% else %}
         <h1> Invalid place </h1>
     {% endif %}
-
+    <div id="home_map"></div>
     <div id="closest_neighbours">
         <a href="/"> home </a>
         <p> Closest stand from <span id="name_of_stands"> {{ name_of_place[1] }} </span> </p>
@@ -85,7 +85,34 @@
     </table>
     <div id="current_chart"></div>
     <div id="historical_chart"></div>
+    <script>
+        function googleMap(){
+            var canvas= document.getElementById("home_map");
+            var myCenter= new google.maps.LatLng({{ name_of_place[2] }},{{ name_of_place[3] }});
+            var options= {center: myCenter, zoom:16};
+            var map= new google.maps.Map(canvas,options);
+
+            if ({{ all_data[6] }}== 0){
+                markerColour = "red";
+            } else if ({{ all_data[6] }}< 5) {
+                markerColour = "orange";
+            } else {
+                markerColour = "green";
+            }
+            var marker = new google.maps.Marker({
+                    position: myCenter
+            });
+            var image = {
+                url: 'static/images/' + markerColour + '_bike.png',
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(65, 65)
+            };
+            marker.setIcon(image);
+            marker.setMap(map);
+        }
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
 
 </body>
 </html>
