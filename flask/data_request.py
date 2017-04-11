@@ -2,6 +2,7 @@ import pymysql
 import datetime
 import time
 import closest_neighbour
+from pandas import DataFrame as df
 
 class database_queries:
 
@@ -86,8 +87,9 @@ class database_queries:
         # cur.close()
         return data
 
-    def historical_data(self, station_number):
-        day = datetime.datetime.today().weekday()
+    def historical_data(self, station_number, day = None):
+        if day is None:
+            day = datetime.datetime.today().weekday()
         cur = self.conn.cursor()
         query_string = "SELECT hour, AVG(available_bikes) FROM Bike_Data WHERE number = '{0}' AND weekday = {1} GROUP BY hour;".format(station_number, day)
         cur.execute(query_string)
