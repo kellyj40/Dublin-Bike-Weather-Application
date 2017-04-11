@@ -42,4 +42,3 @@ def location_selection():
 
 if __name__ == "__main__":
     app.run(debug=True)
-

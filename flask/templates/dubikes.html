@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ name_of_place[1] }}</title>
+    <title id="name_of_stands">{{ name_of_place[1] }}</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -55,9 +55,23 @@
     {% else %}
         <h1> Invalid place </h1>
     {% endif %}
-
+    <a href="/"> home </a>
+    <table>
+        <tr>
+            <td><img src='static/images/green_bike.png' class="legend_image"></td>
+            <td>More than 5 available bikes</td>
+        </tr>
+        <tr>
+            <td><img src='static/images/orange_bike.png' class="legend_image"></td>
+            <td>Less than 5 bikes available</td>
+        </tr>
+        <tr>
+            <td><img src='static/images/red_bike.png' class="legend_image"></td>
+            <td>No available bikes</td>
+        </tr>
+    </table>
+    <div id="home_map"></div>
     <div id="closest_neighbours">
-        <a href="/"> home </a>
         <p> Closest stand from <span id="name_of_stands"> {{ name_of_place[1] }} </span> </p>
         <a href="/location?location2={{ neighbours[0][0] }}"> <span id="name_of_stands"> 1 - {{ neighbours[0][1] }} </span></a><br>
         <a href="/location?location2={{ neighbours[1][0] }}"> <span id="name_of_stands"> 2 - {{ neighbours[1][1] }} </span></a><br>
@@ -95,7 +109,36 @@
 </div>
     <script>
 
+    <div id="historical_chart"></div>
+    <script>
+        function googleMap(){
+            var canvas= document.getElementById("home_map");
+            var myCenter= new google.maps.LatLng({{ name_of_place[2] }},{{ name_of_place[3] }});
+            var options= {center: myCenter, zoom:16};
+            var map= new google.maps.Map(canvas,options);
+
+            if ({{ all_data[6] }}== 0){
+                markerColour = "red";
+            } else if ({{ all_data[6] }}< 5) {
+                markerColour = "orange";
+            } else {
+                markerColour = "green";
+            }
+            var marker = new google.maps.Marker({
+                    position: myCenter
+            });
+            var image = {
+                url: 'static/images/' + markerColour + '_bike.png',
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(65, 65)
+            };
+            marker.setIcon(image);
+            marker.setMap(map);
+        }
+>>>>>>> 40f6340861e9fa2f102efb45e6bb87062d4615a0
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
 
 </body>
 </html>

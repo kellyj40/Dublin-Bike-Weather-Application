@@ -16,7 +16,6 @@ h1{
     display:none;
 }
 
-
 #weather {
     color: green;
     float: right;
@@ -25,34 +24,32 @@ h1{
     right: 8px;
 }
 
-#current_chart{
-    width:50%;
-    left:0;
-}
-
-#historical_chart{
-    width:50%;
-    right:0;
-}
-
 #place {
     display: none;
 }
 
-#closest_neighbour {
-
+#closest_neighbours {
+    float: left;
+    width:25%
 }
 
 #station_table {
-
+    float:left;
+    width:25%
 }
 
 #current_chart {
     float: left;
+    width:25%
 
 }
 
 #historical_chart {
     float: left;
+    width:25%;
+}
+.legend_image{
+    height:30px;
+    width:30px;
 }
 

@@ -17,8 +17,6 @@ def test_pandas():
 
 
 
-
-
     connection2 = engine.connect()
     day = datetime.datetime.today().weekday()
     station_number = 6
