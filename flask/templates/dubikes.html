@@ -32,7 +32,6 @@
 
       function drawHistoricalChart() {
       var historicalData = new google.visualization.DataTable();
-      <!--historicalData.addColumn("datetime", "Date and Time");-->
       historicalData.addColumn("number", "Hour");
       historicalData.addColumn("number", "Available Bikes");
       historicalData.addRows( {{ historical_data_day }} );
@@ -117,15 +116,11 @@
     </table>
     <div id="current_chart"></div>
     <div id="char_2">
-        <div id = "select_day">
-            <form action="graph" method="get">
-                <button value="week">Week</button><button value = "day">Day</button>
-            </form>
-        </div>
-    <div id="historical_chart"></div>
+        <button onclick="show_weekly()">Week</button><button onclick = show_daily()>Day</button>
+        <div id="historical_chart"></div>
+        <div id="historical_chart_week"></div>
+    </div>
 
-</div>
-  <div id="historical_chart_week"></div>
 
     <script>
         function googleMap(){
@@ -152,6 +147,14 @@
             };
             marker.setIcon(image);
             marker.setMap(map);
+        }
+        function show_weekly(){
+            document.getElementById("historical_chart").style.display = 'none';
+            document.getElementById("historical_chart_week").style.display = 'block';
+        }
+        function show_daily(){
+            document.getElementById("historical_chart").style.display = 'block';
+            document.getElementById("historical_chart_week").style.display = 'incline';
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
