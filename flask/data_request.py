@@ -94,7 +94,7 @@ class database_queries:
         query_string = "SELECT hour, AVG(available_bikes) FROM Bike_Data WHERE number = '{0}' AND weekday = {1} GROUP BY hour;".format(station_number, day)
         cur.execute(query_string)
         self.conn.commit()
-        data=[]
+        data = []
         for row in cur.fetchall():
             # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
             data.append([row[0], int(row[1])])
@@ -102,14 +102,15 @@ class database_queries:
 
     def historical_data_week(self, station_number):
         cur = self.conn.cursor()
-        query_string = "SELECT weekday, AVG(available_bikes) FROM Bike_Data WHERE number = '{0}' GROUP BY weekday;".format(
+        query_string = "SELECT weekday, AVG(available_bikes), AVG(available_bike_stands) FROM Bike_Data WHERE number = '{0}' GROUP BY weekday;".format(
             station_number)
         cur.execute(query_string)
         self.conn.commit()
         data = []
         for row in cur.fetchall():
             # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
-            data.append([row[0], int(row[1])])
+            data.append([row[0], int(row[1]), int(row[2])])
+        print(data)
         return data
 
 

@@ -27,7 +27,7 @@
       google.charts.load("historical", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawHistoricalChart);
       <!--google.charts.load('historical2', {'packages':['bar']});-->
-      google.charts.setOnLoadCallback(drawHistoricalWeekChart);
+      <!--google.charts.setOnLoadCallback(drawHistoricalWeekChart);-->
 
 
       function drawHistoricalChart() {
@@ -60,7 +60,7 @@
         var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart_week'));
         historicalChart.draw(historicalData, historicalOptions);
 
-      }
+    }
     </script>
 
 
@@ -73,13 +73,13 @@
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
          ['Day', 'Available bikes', 'Available stands'],
-         ['Mon',  165,      938],
-         ['Tues',  135,      1120],
-         ['Wed',  157,      1167],
-         ['Thur',  139,      1110],
-         ['Fri',  136,      691],
-         ['Sat',  139,      1110],
-         ['Sun',  136,      691]
+         ['Mon',  {{ historical_data_week[0][1] }},  {{ historical_data_week[0][2] }}],
+         ['Tues',  {{ historical_data_week[1][1] }},  {{ historical_data_week[1][2] }}],
+         ['Wed',  {{ historical_data_week[2][1] }},  {{ historical_data_week[2][2] }}],
+         ['Thur',  {{ historical_data_week[3][1] }},  {{ historical_data_week[3][2] }}],
+         ['Fri',  {{ historical_data_week[4][1] }},  {{ historical_data_week[4][2] }}],
+         ['Sat',  {{ historical_data_week[5][1] }},  {{ historical_data_week[5][2] }}],
+         ['Sun',  {{ historical_data_week[6][1] }},  {{ historical_data_week[6][2] }}]
       ]);
 
     var options = {
