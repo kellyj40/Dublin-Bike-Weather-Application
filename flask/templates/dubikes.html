@@ -26,9 +26,6 @@
 
       google.charts.load("historical", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawHistoricalChart);
-      <!--google.charts.load('historical2', {'packages':['bar']});-->
-      <!--google.charts.setOnLoadCallback(drawHistoricalWeekChart);-->
-
 
       function drawHistoricalChart() {
       var historicalData = new google.visualization.DataTable();
@@ -45,22 +42,6 @@
         historicalChart.draw(historicalData, historicalOptions);
     }
 
-     function drawHistoricalWeekChart() {
-      var historicalData = new google.visualization.DataTable();
-      historicalData.addColumn("number", "Day");
-      historicalData.addColumn("number", "Available Bikes");
-      historicalData.addRows( {{ historical_data_week }} );
-
-       var historicalOptions = {
-          title: 'Weekly Occupancy',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart_week'));
-        historicalChart.draw(historicalData, historicalOptions);
-
-    }
     </script>
 
 
@@ -72,7 +53,7 @@
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-         ['Day', 'Available bikes', 'Available stands'],
+         ['Day', 'Bikes', 'Stands'],
          ['Mon',  {{ historical_data_week[0][1] }},  {{ historical_data_week[0][2] }}],
          ['Tues',  {{ historical_data_week[1][1] }},  {{ historical_data_week[1][2] }}],
          ['Wed',  {{ historical_data_week[2][1] }},  {{ historical_data_week[2][2] }}],
@@ -90,7 +71,7 @@
       series: {2: {type: 'line'}}
     };
 
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    var chart = new google.visualization.ComboChart(document.getElementById('historical_chart_week'));
     chart.draw(data, options);
   }
     </script>
@@ -98,7 +79,6 @@
   </head>
 </head>
 <body>
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
  {% if name_of_place %}
         <h1> <span id="name_of_stands"> {{ name_of_place[1] }} </span> </h1>
     {% else %}
