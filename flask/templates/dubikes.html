@@ -42,8 +42,11 @@
           curveType: 'function',
           legend: { position: 'bottom' }
         };
-}
-       function drawHistoricalWeekChart() {
+        var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart'));
+        historicalChart.draw(historicalData, historicalOptions);
+    }
+
+     function drawHistoricalWeekChart() {
       var historicalData = new google.visualization.DataTable();
       <!--historicalData.addColumn("datetime", "Date and Time");-->
       historicalData.addColumn("number", "Day");
