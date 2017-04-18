@@ -30,26 +30,30 @@ h1{
 
 #closest_neighbours {
     float: left;
-    width:25%
+    width:20%
 }
 
 #station_table {
     float:left;
-    width:25%
+    width:20%
 }
 
 #current_chart {
     float: left;
-    width:25%
-
+    width:20%
 }
 
-#historical_chart {
+#char_2 {
     float: left;
-    width:25%;
+    width:20%;
 }
 .legend_image{
     height:30px;
     width:30px;
+}
+
+#historical_chart_week{
+    float: left;
+    width: 20%;
 }
 

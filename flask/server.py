@@ -29,13 +29,15 @@ def location_selection():
     name_of_place, most_recent_data, neighbours = db_queries_locations.get_station_name(number_of_station)  # Get name from static
     all_data = most_recent_data[number_of_station]
     day = None
-    historical_data_day = db_queries_locations.historical_data(number_of_station, day)
+    historical_data_day = db_queries_locations.historical_data_day(number_of_station, day)
+    historical_data_week = db_queries_locations.historical_data_week(number_of_station)
     # historical_data = location_queries.historical()
     name_of_place = list(name_of_place)
     place_lower = name_of_place[1]
     name_of_place[1] = place_lower.lower()
     return render_template('dubikes.html', name_of_place=name_of_place, all_data=all_data,
-                           neighbours=neighbours, historical_data_day=historical_data_day)
+                           neighbours=neighbours, historical_data_day=historical_data_day,
+                           historical_data_week=historical_data_week)
 
 # @app.route('/location')
 # def location_selection():

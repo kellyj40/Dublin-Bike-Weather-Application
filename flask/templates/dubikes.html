@@ -26,6 +26,9 @@
 
       google.charts.load("historical", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawHistoricalChart);
+      <!--google.charts.load('historical2', {'packages':['bar']});-->
+      google.charts.setOnLoadCallback(drawHistoricalWeekChart);
+
 
       function drawHistoricalChart() {
       var historicalData = new google.visualization.DataTable();
@@ -39,9 +42,23 @@
           curveType: 'function',
           legend: { position: 'bottom' }
         };
+}
+       function drawHistoricalWeekChart() {
+      var historicalData = new google.visualization.DataTable();
+      <!--historicalData.addColumn("datetime", "Date and Time");-->
+      historicalData.addColumn("number", "Day");
+      historicalData.addColumn("number", "Available Bikes");
+      historicalData.addRows( {{ historical_data_week }} );
 
-        var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart'));
+       var historicalOptions = {
+          title: 'Weekly Occupancy',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart_week'));
         historicalChart.draw(historicalData, historicalOptions);
+
       }
     </script>
 
@@ -95,19 +112,18 @@
             <td>{{ all_data[6] }}</td>
         </tr>
     </table>
-
     <div id="current_chart"></div>
     <div id="char_2">
         <div id = "select_day">
             <form action="graph" method="get">
-                <button value="week">Week</button><button value = "day">Day</button><button value = "hour">Hour</button>
+                <button value="week">Week</button><button value = "day">Day</button>
             </form>
         </div>
-    <div id="historical_chart">
-    </div>
-</div>
-
     <div id="historical_chart"></div>
+
+</div>
+  <div id="historical_chart_week"></div>
+
     <script>
         function googleMap(){
             var canvas= document.getElementById("home_map");

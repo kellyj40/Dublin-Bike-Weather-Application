@@ -87,7 +87,7 @@ class database_queries:
         # cur.close()
         return data
 
-    def historical_data(self, station_number, day = None):
+    def historical_data_day(self, station_number, day = None):
         if day is None:
             day = datetime.datetime.today().weekday()
         cur = self.conn.cursor()
@@ -95,6 +95,18 @@ class database_queries:
         cur.execute(query_string)
         self.conn.commit()
         data=[]
+        for row in cur.fetchall():
+            # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
+            data.append([row[0], int(row[1])])
+        return data
+
+    def historical_data_week(self, station_number):
+        cur = self.conn.cursor()
+        query_string = "SELECT weekday, AVG(available_bikes) FROM Bike_Data WHERE number = '{0}' GROUP BY weekday;".format(
+            station_number)
+        cur.execute(query_string)
+        self.conn.commit()
+        data = []
         for row in cur.fetchall():
             # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
             data.append([row[0], int(row[1])])
