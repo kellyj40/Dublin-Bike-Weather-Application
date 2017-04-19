@@ -9,146 +9,186 @@
 </head>
 
 <body>
-    <h1>Dublin Bikes</h1>
-    <A HREF="javascript:history.go(0)" id="home_button">Home</A>
-    <table>
-        <tr>
-            <td><img src='static/images/green_bike.png' class="legend_image"></td>
-            <td>More than 5 available bikes</td>
-        </tr>
-        <tr>
-            <td><img src='static/images/orange_bike.png' class="legend_image"></td>
-            <td>Less than 5 bikes available</td>
-        </tr>
-        <tr>
-            <td><img src='static/images/red_bike.png' class="legend_image"></td>
-            <td>No available bikes</td>
-        </tr>
-    </table>
-    <div id="home_map"></div>
-    <form action="location" method="get">
-        <select id = "setopt" name="location2" onchange="googleMap.changeMap(this.value); textBox(this.value)">
-            <option value="" selected disabled>Please select a location</option>
-        {% for item in locations %}
-            <option value={{ item[0] }} id="select_place">{{ item[1] }}</option>
-        {% endfor %}
-        </select>
-        <input type="submit" id="place" value="More info" />
-    </form>
-    <div id="text"></div>
-    <div id="weather"></div>
-    <script type="text/javascript" , src="{{ url_for('static', filename='js/weather.js') }}"></script>
+    <div id="wrapper">
+        <table id="legend_table">
+            <tr>
+                <td><img src='static/images/green_bike.png' class="legend_image"></td>
+                <td>More than 5 available bikes</td>
+            </tr>
+            <tr>
+                <td><img src='static/images/orange_bike.png' class="legend_image"></td>
+                <td>Less than 5 available bikes</td>
+            </tr>
+            <tr>
+                <td><img src='static/images/red_bike.png' class="legend_image"></td>
+                <td>No available bikes</td>
+            </tr>
+        </table>
 
-    <script>
-
-        function googleMap() {
-            var canvas = document.getElementById("home_map");
-            var myCenter = new google.maps.LatLng(53.3473, -6.2588);
-            var myStyles = [{
-                featureType: "poi",
-                elementType: "labels",
-                stylers: [{
-                    visibility: "off"
-                }]
-            }];
-            var options = {
-                center: myCenter,
-                zoom: 13,
-                styles: myStyles
-            };
-            var map = new google.maps.Map(canvas, options);
-            var markerColour = "";
-            var markers = [];
-
-            setMarkers(-1);
-
-            function setMarkers(selected) { <!--Function for adding markers to map based on occupancy and selected status-->
-                {% for item in locations %} <!-- setting the colour for the markers based on number of available bikes -->
-                if ({{ current_data[item[0] | string][6] }} == 0) {
-                    markerColour = "red";
-                } else if ({{ current_data[item[0] | string][6] }} < 5) {
-                    markerColour = "orange";
-                } else {
-                    markerColour = "green";
-                }
-
-                var myPosition = new google.maps.LatLng({{ item[2] }},
-                {{ item[3] }}); <!-- initialising marker -->
-                var marker = new google.maps.Marker({
-                    position: myPosition
-                });
-                marker.setMap(map);
-                if ({{ item[0] }} == selected) {
-                    var image = { <!-- setting size to be bigger than unselected markers -->
-                        url: 'static/images/' + markerColour + '_bike.png',
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(65, 65)
-                    };
-                } else {
-                    var image = { <!-- setting custom image to take place of marker, based on markerColour from above -->
-                        url: 'static/images/' + markerColour + '_bike.png',
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(35, 35)
-                    };
-                }
-                markers.push(marker); <!--adding marker to array so it can be removed later -->
-                marker.setIcon(image);
-                marker.addListener("click", function() {
-                    changeMap({{ item[0] }});
-                    textBox({{ item[0] }});
-                 }); <!-- calling changeMap() on click of marker -->
-                {% endfor %}
-            }
-
-            function clearMarkers() { <!-- Function for removing all previous map markers -->
-                while (markers[0]) {
-                    markers.pop().setMap(null);
-                }
-            }
-
-            function changeMap(place) { <!-- changing map based on "place" location being selected -->
-            document.getElementById("setopt").value = place;
-                var x = document.getElementById('home_button');
-                x.style.display = 'block';
-                map.setZoom(16);
+        <div id="home_map"></div>
+        <a href="javascript:history.go(0)" id="home_button"><img src="static/images/homepage_icon.png" id="home_icon"></a>
+        <div id="info_button"><img src="static/images/info_icon.png" id="info_icon"></div>
+        <div id="heading">Dublin Bikes Occupancy</div>
+            <form id="location_dropdown" action="location" method="get">
+                <select id = "setopt" name="location2" onchange="googleMap.changeMap(this.value); textBox(this.value)">
+                    <option value="" selected disabled>-- Select Location --</option>
                 {% for item in locations %}
-                if ({{ item[0] }} == place.toString()) {
-                    var newCenter = new google.maps.LatLng({{ item[2] }},
-                    {{ item[3] }}
-                    );
-                    map.setCenter(newCenter);
-                }
+                    <option value={{ item[0] }} id="select_place">{{ item[1] }}</option>
                 {% endfor %}
-                clearMarkers();
-                setMarkers(place);
-            }
-            googleMap.changeMap = changeMap;
-        }
+                </select>
+                <input type="submit" id="place" value="Click here for more"/>
+            </form>
+            <div id="stop_info"></div>
+            <div id="weather"></div>
+            <div id="info_box"><br>Welcome to our Dublin Bikes Occupancy web application!<br><br>The application collects data relating
+                to the occupancy of Dublin Bikes located at stands throughout the city. Select a location from the dropdown menu
+                or simply click on a marker on the map to display current information. Click the "Click here for more" button after selecting
+                a location to see current and historical charts for the bike occupancy of the stand. <br><br> This application was completed
+                as an assignment for a Software Engineering module in University College Dublin. <br><br> Created by Jake Kavanagh, Joe Kelly and Conor Wyse
+            </div>
+            <script type="text/javascript" , src="{{ url_for('static', filename='js/weather.js') }}"></script>
+            <script>
+                function googleMap() {
+                    var canvas = document.getElementById("home_map");
+                    var myCenter = new google.maps.LatLng(53.3463, -6.265);
+                    var myStyles = [
+                        {
+                            "featureType": "all",
+                            "elementType": "geometry.fill",
+                            "stylers": [{"weight": "2.00"}]
+                        },
+                        {
+                            "featureType": "poi",
+                            "elementType": "labels",
+                            "stylers": [{"visibility": "off"}]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "all",
+                            "stylers": [
+                                {"saturation": -100},
+                                {"lightness": 45}
+                                ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "all",
+                            "stylers": [{"visibility": "simplified"}]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "labels.icon",
+                            "stylers": [{"visibility": "off"}]
+                        },
+                    ];
+                    var options = {
+                        center: myCenter,
+                        zoom: 14,
+                        styles: myStyles,
+                        mapTypeControl: false,
+                        streetViewControl: false,
+                        zoomControl: false
+                    };
+                    var map = new google.maps.Map(canvas, options);
+                    var markerColour = "";
+                    var markers = [];
 
-        function textBox(x) {
-            {% for item in locations %}
-            if ({{ item[0] }} == x) {
-                var update = {{ current_data[item[0] | string][7] }}
-                + " MINUTES AGO";
-                var current = "TOTAL BIKES: "
-                + {{ current_data[item[0] | string][4] }}
-                + "<br> AVAILABLE BIKES: "
-                + {{ current_data[item[0] | string][6] }}
-                + "<br> FREE BIKE STANDS: "
-                + {{ current_data[item[0] | string][5] }}
-                + "<br> LAST UPDATED " + update;
-                display();
-                document.getElementById("text").innerHTML = "SELECTED LOCATION: {{ item[1] }} <br>" + current;
-            } {% endfor %}
-        }
-        weather({{ weather | tojson }});
-        function display(){
-        document.getElementById("place").style.display = 'block';
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
+                    setMarkers(-1);
+
+                    function setMarkers(selected) { <!--Function for adding markers to map based on occupancy and selected status-->
+                        {% for item in locations %} <!-- setting the colour for the markers based on number of available bikes -->
+                        if ({{ current_data[item[0] | string][6] }} == 0) {
+                            markerColour = "red";
+                        } else if ({{ current_data[item[0] | string][6] }} < 5) {
+                            markerColour = "orange";
+                        } else {
+                            markerColour = "green";
+                        }
+
+                        var myPosition = new google.maps.LatLng({{ item[2] }},
+                        {{ item[3] }}); <!-- initialising marker -->
+                        var marker = new google.maps.Marker({
+                            position: myPosition
+                        });
+                        marker.setMap(map);
+                        if ({{ item[0] }} == selected) {
+                            var image = { <!-- setting size to be bigger than unselected markers -->
+                                url: 'static/images/' + markerColour + '_bike.png',
+                                origin: new google.maps.Point(0, 0),
+                                anchor: new google.maps.Point(17, 34),
+                                scaledSize: new google.maps.Size(65, 65)
+                            };
+                        } else {
+                            var image = { <!-- setting custom image to take place of marker, based on markerColour from above -->
+                                url: 'static/images/' + markerColour + '_bike.png',
+                                origin: new google.maps.Point(0, 0),
+                                anchor: new google.maps.Point(17, 34),
+                                scaledSize: new google.maps.Size(35, 35)
+                            };
+                        }
+                        markers.push(marker); <!--adding marker to array so it can be removed later -->
+                        marker.setIcon(image);
+                        marker.addListener("click", function() {
+                            changeMap({{ item[0] }});
+                            textBox({{ item[0] }});
+                         }); <!-- calling changeMap() on click of marker -->
+                        {% endfor %}
+                    }
+
+                    function clearMarkers() { <!-- Function for removing all previous map markers -->
+                        while (markers[0]) {
+                            markers.pop().setMap(null);
+                        }
+                    }
+
+                    function changeMap(place) { <!-- changing map based on "place" location being selected -->
+                    document.getElementById("setopt").value = place;
+                        var x = document.getElementById('home_button');
+                        x.style.display = 'block';
+                        map.setZoom(16);
+                        {% for item in locations %}
+                        if ({{ item[0] }} == place.toString()) {
+                            var newCenter = new google.maps.LatLng({{ item[2] }},
+                            {{ item[3] }}
+                            );
+                            map.setCenter(newCenter);
+                        }
+                        {% endfor %}
+                        clearMarkers();
+                        setMarkers(place);
+                    }
+                    googleMap.changeMap = changeMap;
+                }
+
+                function textBox(x) {
+                    {% for item in locations %}
+                    if ({{ item[0] }} == x) {
+                        if ( {{ current_data[item[0] | string][7] }} == 1 ){
+                            var update = {{ current_data[item[0] | string][7] }}
+                        + " Minute Ago";
+                        }
+                        else{
+                        var update = {{ current_data[item[0] | string][7] }}
+                        + " Minutes Ago";
+                        }
+                        var current = "<br>Available Bikes: "
+                        + {{ current_data[item[0] | string][6] }}
+                        + "<br> Free Bike Stands: "
+                        + {{ current_data[item[0] | string][5] }}
+                        + "<br> Last Updated " + update;
+                        display();
+                        document.getElementById("stop_info").innerHTML = "<b> {{ item[1] }} </b>" + current;
+                    } {% endfor %}
+                }
+                weather({{ weather | tojson }});
+                function display(){
+                document.getElementById("place").style.display = 'block';
+                }
+                document.getElementById("info_button").addEventListener("mouseover", function() {document.getElementById("info_box").style.display='block'});
+                document.getElementById("info_button").addEventListener("mouseout", function() {document.getElementById("info_box").style.display='none'});
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
+    </div>
 </body>
 
 </html>

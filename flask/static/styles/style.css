@@ -1,33 +1,117 @@
-h1{
-    color:midnightblue;
-    text-align:center;
+#heading{
+    position:absolute;
+    top: 30px;
+    left: 25px;
+    font-size: 25px;
+    font-weight:bold;
+    font-family:Calibri;
+    border-radius:10px;
 }
+#home_button{
+    position:absolute;
+    border-radius: 30px;
+    left:25px;
+    top:65px;
+}
+#home_icon{
+    height:30px;
+}
+#info_button{
+    position:absolute;
+    border-radius:30px;
+    left:65px;
+    top:65px;
+    cursor:pointer;
+}
+#info_icon{
+    height:30px;
+}
+#info_box{
+    font-family:Calibri;
+    position:absolute;
+    display:none;
+    padding:5px;
+    top: 110px;
+    left: 20px;
+    width:500px;
+    height:265px;
+    border-radius:5px;
+    background-color:white;
+    z-index:99;
+}
+h1{
+    font-family: Calibri;
+    display:inline;
+    margin-left: 30px;
+}
+body, html {
+    margin:0;
+    height: 100%;
+    width: 100%;
+    overflow:hidden;
+}
+#wrapper{
+    position:relative;
+    height:100%;
+    width:100%;
+}
+
 #name_of_stands{
     text-transform: capitalize;
 }
-
 #home_map{
-    margin: auto;
-    width:900px;
-    height:375px;
+    margin:0;
+    width:100%;
+    height:100%;
 }
-
-#home_button{
-    display:none;
+#location_dropdown{
+    position:absolute;
+    top: 40px;
+    right: 230px;
+    z-index: 99;
+    width:100px;
 }
-
-#weather {
-    color: green;
-    float: right;
-    position: fixed;
-    top: 8px;
-    right: 8px;
-}
-
 #place {
-    display: none;
+    display:none;
+    border-radius:5px;
+    margin-top:10px;
+    width:233px;
+    background-color:black;
+    color:white;
+    opactiy:0.9;
+    font-family:Calibri;
+    font-weight:bold;
+    cursor:pointer;
 }
-
+#setopt{
+    border-radius: 5px;
+    background-color: white;
+    font-family: Calibri;
+    font-weight:bold;
+}
+#weather {
+    background-color:white;
+    opacity:0.9;
+    font-family: Calibri;
+    position: absolute;
+    bottom: 20px;
+    right: 90px;
+    z-index:2;
+    border-radius:10px;
+}
+#weather_icon_cell{
+    padding-left:20px;
+}
+#stop_info{
+    border-radius:5px;
+    background-color:white;
+    font-family: Calibri;
+    position: absolute;
+    width:230px;
+    top: 100px;
+    right:100px;
+    z-index:2;
+}
 #closest_neighbours {
     float: left;
     width:20%
@@ -45,21 +129,24 @@ h1{
 
 #char_2 {
     float: left;
-    width:40%;
+    width:20%;
 }
+#legend_table{
+    font-family: Calibri;
+    position: absolute;
+    top: 110px;
+    left: 20px;
+    z-index:2;
+    border-radius:10px;
+    background-color:white;
+    opacity:0.9;
+    width:150px;
+    }
 .legend_image{
     height:30px;
     width:30px;
 }
-
-#historical_chart{
-    width:100%;
-    height:100%;
-}
-
 #historical_chart_week{
-     width:100%;
-    height:100%;
-    display: none;
+    float: left;
+    width: 20%;
 }
-
