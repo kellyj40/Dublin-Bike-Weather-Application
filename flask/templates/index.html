@@ -164,12 +164,10 @@
                     {% for item in locations %}
                     if ({{ item[0] }} == x) {
                         if ( {{ current_data[item[0] | string][7] }} == 1 ){
-                            var update = {{ current_data[item[0] | string][7] }}
-                        + " Minute Ago";
+                            var update = {{ current_data[item[0] | string][7] }} + " Minute Ago";
                         }
                         else{
-                        var update = {{ current_data[item[0] | string][7] }}
-                        + " Minutes Ago";
+                        var update = {{ current_data[item[0] | string][7] }} + " Minutes Ago";
                         }
                         var current = "<br>Available Bikes: "
                         + {{ current_data[item[0] | string][6] }}
