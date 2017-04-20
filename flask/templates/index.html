@@ -12,15 +12,15 @@
     <div id="wrapper">
         <table id="legend_table">
             <tr>
-                <td><img src='static/images/green_bike.png' class="legend_image"></td>
+                <td><img src='static/images/green.png' class="legend_image"></td>
                 <td>More than 5 available bikes</td>
             </tr>
             <tr>
-                <td><img src='static/images/orange_bike.png' class="legend_image"></td>
+                <td><img src='static/images/orange.png' class="legend_image"></td>
                 <td>Less than 5 available bikes</td>
             </tr>
             <tr>
-                <td><img src='static/images/red_bike.png' class="legend_image"></td>
+                <td><img src='static/images/red.png' class="legend_image"></td>
                 <td>No available bikes</td>
             </tr>
         </table>
@@ -113,14 +113,14 @@
                         marker.setMap(map);
                         if ({{ item[0] }} == selected) {
                             var image = { <!-- setting size to be bigger than unselected markers -->
-                                url: 'static/images/' + markerColour + '_bike.png',
+                                url: 'static/images/' + markerColour + '.png',
                                 origin: new google.maps.Point(0, 0),
                                 anchor: new google.maps.Point(17, 34),
                                 scaledSize: new google.maps.Size(65, 65)
                             };
                         } else {
                             var image = { <!-- setting custom image to take place of marker, based on markerColour from above -->
-                                url: 'static/images/' + markerColour + '_bike.png',
+                                url: 'static/images/' + markerColour + '.png',
                                 origin: new google.maps.Point(0, 0),
                                 anchor: new google.maps.Point(17, 34),
                                 scaledSize: new google.maps.Size(35, 35)

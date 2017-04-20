@@ -110,7 +110,7 @@ class database_queries:
         for row in cur.fetchall():
             # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
             data.append([row[0], int(row[1]), int(row[2])])
-        print(data)
+        # print(data)
         return data
 
 

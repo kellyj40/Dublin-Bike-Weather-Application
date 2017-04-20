@@ -11,13 +11,13 @@
       function drawCurrentChart() {
         var currentData = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Empty',     {{ all_data[5] }} ],
-          ['Is available',      {{ all_data[6] }}],
+          ['Empty Stands',     {{ all_data[5] }} ],
+          ['Available Bikes',      {{ all_data[6] }}],
         ]);
 
         var currentOptions = {
-          title: '{{ name_of_place[1] }} current availability',
-          is3D: true,
+          title: '{{ name_of_place[1] }} Current Occupancy',
+          is3D: true
         };
 
         var currentChart = new google.visualization.PieChart(document.getElementById('current_chart'));
@@ -32,11 +32,22 @@
       historicalData.addColumn("number", "Hour");
       historicalData.addColumn("number", "Available Bikes");
       historicalData.addRows( {{ historical_data_day }} );
-
+        var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        var date= new Date();
        var historicalOptions = {
-          title: 'Historical Occupancy',
+          title: 'Historical '+days[date.getDay()]+' Occupancy',
           curveType: 'function',
-          legend: { position: 'bottom' }
+          legend: { position: 'bottom'},
+          vAxis: {
+            title: 'Number of bikes',
+            viewWindowMode:'explicit',
+            viewWindow:{min:0},
+            ticks: [0,5,10,15,20,25,30,35,40],
+            },
+          hAxis: {
+            title: 'Time (0-23)',
+            ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+            }
         };
         var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart'));
         historicalChart.draw(historicalData, historicalOptions);
@@ -64,11 +75,12 @@
       ]);
 
     var options = {
-      title : 'Average daily availability',
+      title : 'Average Availability by Day',
       vAxis: {title: 'Available'},
       hAxis: {title: 'Day'},
       seriesType: 'bars',
-      series: {2: {type: 'line'}}
+      series: {2: {type: 'line'}
+      }
     };
 
     var chart = new google.visualization.ComboChart(document.getElementById('historical_chart_week'));
@@ -79,56 +91,34 @@
   </head>
 </head>
 <body>
- {% if name_of_place %}
-        <h1> <span id="name_of_stands"> {{ name_of_place[1] }} </span> </h1>
-    {% else %}
-        <h1> Invalid place </h1>
-    {% endif %}
-    <a href="/"> home </a>
-    <table>
-        <tr>
-            <td><img src='static/images/green_bike.png' class="legend_image"></td>
-            <td>More than 5 available bikes</td>
-        </tr>
-        <tr>
-            <td><img src='static/images/orange_bike.png' class="legend_image"></td>
-            <td>Less than 5 bikes available</td>
-        </tr>
-        <tr>
-            <td><img src='static/images/red_bike.png' class="legend_image"></td>
-            <td>No available bikes</td>
-        </tr>
-    </table>
-    <div id="home_map"></div>
-    <div id="closest_neighbours">
-        <p> Closest stand from <span id="name_of_stands"> {{ name_of_place[1] }} </span> </p>
-        <a href="/location?location2={{ neighbours[0][0] }}"> <span id="name_of_stands"> 1 - {{ neighbours[0][1] }} </span></a><br>
-        <a href="/location?location2={{ neighbours[1][0] }}"> <span id="name_of_stands"> 2 - {{ neighbours[1][1] }} </span></a><br>
-        <a href="/location?location2={{ neighbours[2][0] }}"> <span id="name_of_stands"> 3 - {{ neighbours[2][1] }} </span></a>
+    <div id="location_map"></div>
+    <a href="/" id="home_button"><img src="static/images/homepage_icon.png" id="home_icon"></a>
+    <div id="info_button"><img src="static/images/info_icon.png" id="info_icon"></div>
+    <div id="heading">Dublin Bikes Occupancy</div>
+    <h2 id="selected_location">Selected Location: {{ name_of_place[1] }}</h2>
+    <div id="info_box"><br>Welcome to our Dublin Bikes Occupancy web application!<br><br>The application collects data relating
+                to the occupancy of Dublin Bikes located at stands throughout the city. Select a location from the dropdown menu
+                or simply click on a marker on the map to display current information. Click the "Click here for more" button after selecting
+                a location to see current and historical charts for the bike occupancy of the stand. <br><br> This application was completed
+                as an assignment for a Software Engineering module in University College Dublin. <br><br> Created by Jake Kavanagh, Joe Kelly and Conor Wyse
     </div>
-
-
-    <table id="station_table">
-         <tr>
-            <td>Credit Card Facility</td>
-            <td>{{ all_data[0] }}</td>
-         </tr>
-         <tr>
-            <td>Total Stands</td>
-            <td>{{ all_data[4] }}</td>
-         </tr>
-         <tr>
-            <td>Stands Available</td>
-            <td>{{ all_data[5] }}</td>
-         </tr>
-        <tr>
-            <td>Bikes Available</td>
-            <td>{{ all_data[6] }}</td>
-        </tr>
+    <table id="nearby_table">
+        <tr><td colspan="2" class="sub_headings">Nearby stands</td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[0][0] }}"> <span id="name_of_stands"> {{ neighbours[0][1] }} </span></a></td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[1][0] }}"> <span id="name_of_stands"> {{ neighbours[1][1] }} </span></a></td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[2][0] }}"> <span id="name_of_stands"> {{ neighbours[2][1] }} </span></a></td></tr>
+    </table>
+    <table id="info_table">
+        <tr><td colspan="2" class="sub_headings">Current information</td></tr>
+        <tr><td class="first_col_cells">Total number of stands</td><td class="second_col_cells"> {{ all_data[4] }} </td></tr>
+        <tr><td class="first_col_cells">Available bikes</td><td class="second_col_cells"> {{ all_data[6] }} </td></tr>
+        <tr><td class="first_col_cells">Vacant stands</td><td class="second_col_cells"> {{ all_data[5] }} </td></tr>
     </table>
     <div id="current_chart"></div>
     <div id="char_2">
-        <button onclick="show_weekly()">Week</button><button onclick = show_daily()>Day</button>
+        <div id="graph_buttons">
+        <button id="daily_button" onclick = show_daily()>Daily</button><button id="weekly_button" onclick="show_weekly()">Weekly</button>
+        </div>
         <div id="historical_chart"></div>
         <div id="historical_chart_week"></div>
     </div>
@@ -137,9 +127,46 @@
 
     <script>
         function googleMap(){
-            var canvas= document.getElementById("home_map");
+            var canvas= document.getElementById("location_map");
             var myCenter= new google.maps.LatLng({{ name_of_place[2] }},{{ name_of_place[3] }});
-            var options= {center: myCenter, zoom:16};
+            var myStyles = [
+                        {
+                            "featureType": "all",
+                            "elementType": "geometry.fill",
+                            "stylers": [{"weight": "2.00"}]
+                        },
+                        {
+                            "featureType": "poi",
+                            "elementType": "labels",
+                            "stylers": [{"visibility": "off"}]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "all",
+                            "stylers": [
+                                {"saturation": -100},
+                                {"lightness": 45}
+                                ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "all",
+                            "stylers": [{"visibility": "simplified"}]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "labels.icon",
+                            "stylers": [{"visibility": "off"}]
+                        },
+                    ];
+            var options = {
+                        center: myCenter,
+                        zoom: 16,
+                        styles: myStyles,
+                        mapTypeControl: false,
+                        streetViewControl: false,
+                        zoomControl: false
+                    };
             var map= new google.maps.Map(canvas,options);
 
             if ({{ all_data[6] }}== 0){
@@ -153,7 +180,7 @@
                     position: myCenter
             });
             var image = {
-                url: 'static/images/' + markerColour + '_bike.png',
+                url: 'static/images/' + markerColour + '.png',
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(17, 34),
                 scaledSize: new google.maps.Size(65, 65)
@@ -164,11 +191,17 @@
         function show_weekly(){
             document.getElementById("historical_chart").style.display = 'none';
             document.getElementById("historical_chart_week").style.display = 'block';
+            document.getElementById("weekly_button").style.backgroundColor = '#008CBA';
+            document.getElementById("daily_button").style.backgroundColor = '#555555';
         }
         function show_daily(){
             document.getElementById("historical_chart").style.display = 'block';
             document.getElementById("historical_chart_week").style.display = 'none';
+            document.getElementById("daily_button").style.backgroundColor = '#008CBA';
+            document.getElementById("weekly_button").style.backgroundColor = '#555555';
         }
+        document.getElementById("info_button").addEventListener("mouseover", function() {document.getElementById("info_box").style.display='block'});
+        document.getElementById("info_button").addEventListener("mouseout", function() {document.getElementById("info_box").style.display='none'});
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
 
