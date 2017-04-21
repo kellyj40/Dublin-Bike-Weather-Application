@@ -91,11 +91,11 @@
   </head>
 </head>
 <body>
+    <div id="heading"><span id="heading_content">Dublin Bikes Occupancy</span><span id="weather"></span><span id="weather_icon"></span></div>
     <div id="location_map"></div>
     <h2 id="selected_location">{{ name_of_place[1] }}</h2>
     <a href="/" id="home_button"><img src="static/images/homepage_icon.png" id="home_icon"></a>
     <div id="info_button"><img src="static/images/info_icon.png" id="info_icon"></div>
-    <div id="heading">Dublin Bikes Occupancy</div>
 
     <div id="info_box"><br>Welcome to our Dublin Bikes Occupancy web application!<br><br>The application collects data relating
                 to the occupancy of Dublin Bikes located at stands throughout the city. Select a location from the dropdown menu
@@ -104,7 +104,7 @@
                 as an assignment for a Software Engineering module in University College Dublin. <br><br> Created by Jake Kavanagh, Joe Kelly and Conor Wyse
     </div>
     <table id="nearby_table">
-        <tr><td colspan="2" class="sub_headings">Nearby stands</td></tr>
+        <tr><th colspan="2">Nearby stands</th></tr>
         <tr><td colspan="2"><a href="/location?location2={{ neighbours[0][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[0][1] }} </span></a></td></tr>
         <tr><td colspan="2"><a href="/location?location2={{ neighbours[1][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[1][1] }} </span></a></td></tr>
         <tr><td colspan="2"><a href="/location?location2={{ neighbours[2][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[2][1] }} </span></a></td></tr>
@@ -124,8 +124,7 @@
         <div id="historical_chart_week"></div>
     </div>
 
-
-
+    <script type="text/javascript" , src="{{ url_for('static', filename='js/weather.js') }}"></script>
     <script>
         function googleMap(){
             var canvas= document.getElementById("location_map");

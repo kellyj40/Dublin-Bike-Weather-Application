@@ -115,9 +115,6 @@ class database_queries:
 
 
 
-
-
-
         # creating
     # def current_info_of_location(self, station_num):
     #     cur = self.conn.cursor()

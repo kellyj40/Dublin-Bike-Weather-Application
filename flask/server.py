@@ -8,6 +8,9 @@ app = Flask(__name__)
 def index():
     db_queries_home = database_queries()
     locations = db_queries_home.get_locations()
+    for i in range(len(locations)):
+        locations[i]=list(locations[i])
+        locations[i][1] = str(locations[i][1]).title()  # converting place names to camel case
     current_data = db_queries_home.current_info()
     weather = db_queries_home.weather_info()
 

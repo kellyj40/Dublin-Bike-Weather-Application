@@ -10,6 +10,7 @@
 
 <body>
     <div id="wrapper">
+        <div id="heading"><span id="heading_content">Dublin Bikes Occupancy</span><span id="weather"></span><span id="weather_icon"></span></div>
         <table id="legend_table">
             <tr>
                 <td><img src='static/images/green.png' class="legend_image"></td>
@@ -28,7 +29,6 @@
         <div id="home_map"></div>
         <a href="javascript:history.go(0)" id="home_button"><img src="static/images/homepage_icon.png" id="home_icon"></a>
         <div id="info_button"><img src="static/images/info_icon.png" id="info_icon"></div>
-        <div id="heading">Dublin Bikes Occupancy</div>
             <form id="location_dropdown" action="location" method="get">
                 <select id = "setopt" name="location2" onchange="googleMap.changeMap(this.value); textBox(this.value)">
                     <option value="" selected disabled>-- Select Location --</option>
@@ -39,7 +39,6 @@
                 <input type="submit" id="place" value="Click here for more"/>
             </form>
             <div id="stop_info"></div>
-            <div id="weather"></div>
             <div id="info_box"><br>Welcome to our Dublin Bikes Occupancy web application!<br><br>The application collects data relating
                 to the occupancy of Dublin Bikes located at stands throughout the city. Select a location from the dropdown menu
                 or simply click on a marker on the map to display current information. Click the "Click here for more" button after selecting
@@ -50,7 +49,7 @@
             <script>
                 function googleMap() {
                     var canvas = document.getElementById("home_map");
-                    var myCenter = new google.maps.LatLng(53.3463, -6.265);
+                    var myCenter = new google.maps.LatLng(53.3455, -6.265);
                     var myStyles = [
                         {
                             "featureType": "all",
@@ -164,18 +163,18 @@
                     {% for item in locations %}
                     if ({{ item[0] }} == x) {
                         if ( {{ current_data[item[0] | string][7] }} == 1 ){
-                            var update = {{ current_data[item[0] | string][7] }} + " Minute Ago";
+                            var update = {{ current_data[item[0] | string][7] }} + " minute ago";
                         }
                         else{
-                        var update = {{ current_data[item[0] | string][7] }} + " Minutes Ago";
+                        var update = {{ current_data[item[0] | string][7] }} + " minutes ago";
                         }
-                        var current = "<br>Available Bikes: "
+                        var current = "<tr><td class='firstcol'>Available Bikes: </td><td>"
                         + {{ current_data[item[0] | string][6] }}
-                        + "<br> Free Bike Stands: "
+                        + "</td></tr><tr><td class='firstcol'> Free Bike Stands: </td><td>"
                         + {{ current_data[item[0] | string][5] }}
-                        + "<br> Last Updated " + update;
+                        + "</td></tr><tr><td class='firstcol'>Last Update: </td><td>" + update+"</td></tr>";
                         display();
-                        document.getElementById("stop_info").innerHTML = "<b> {{ item[1] }} </b>" + current;
+                        document.getElementById("stop_info").innerHTML = "<table id='stop_info_table'><tr><th colspan='2'> {{ item[1] }} </th></tr>" + current+"</table>";
                     } {% endfor %}
                 }
                 weather({{ weather | tojson }});
