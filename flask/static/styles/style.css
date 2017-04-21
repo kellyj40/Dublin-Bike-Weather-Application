@@ -147,7 +147,7 @@ body, html {
 #location_map{
     margin:0;
     width:100%;
-    height:45%;
+    height:60%;
 }
 #nearby_table{
     position: absolute;
@@ -222,7 +222,7 @@ body, html {
 #selected_location{
     font-family: Calibri;
     top: 5px;
-    left:50%;
+    left:45%;
     position: absolute;
 }
 .nearest_neighbour_link{
