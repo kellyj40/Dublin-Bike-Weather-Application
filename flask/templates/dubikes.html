@@ -92,10 +92,11 @@
 </head>
 <body>
     <div id="location_map"></div>
+    <h2 id="selected_location">{{ name_of_place[1] }}</h2>
     <a href="/" id="home_button"><img src="static/images/homepage_icon.png" id="home_icon"></a>
     <div id="info_button"><img src="static/images/info_icon.png" id="info_icon"></div>
     <div id="heading">Dublin Bikes Occupancy</div>
-    <h2 id="selected_location">Selected Location: {{ name_of_place[1] }}</h2>
+
     <div id="info_box"><br>Welcome to our Dublin Bikes Occupancy web application!<br><br>The application collects data relating
                 to the occupancy of Dublin Bikes located at stands throughout the city. Select a location from the dropdown menu
                 or simply click on a marker on the map to display current information. Click the "Click here for more" button after selecting
@@ -104,9 +105,9 @@
     </div>
     <table id="nearby_table">
         <tr><td colspan="2" class="sub_headings">Nearby stands</td></tr>
-        <tr><td colspan="2"><a href="/location?location2={{ neighbours[0][0] }}"> <span id="name_of_stands"> {{ neighbours[0][1] }} </span></a></td></tr>
-        <tr><td colspan="2"><a href="/location?location2={{ neighbours[1][0] }}"> <span id="name_of_stands"> {{ neighbours[1][1] }} </span></a></td></tr>
-        <tr><td colspan="2"><a href="/location?location2={{ neighbours[2][0] }}"> <span id="name_of_stands"> {{ neighbours[2][1] }} </span></a></td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[0][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[0][1] }} </span></a></td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[1][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[1][1] }} </span></a></td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[2][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[2][1] }} </span></a></td></tr>
     </table>
     <table id="info_table">
         <tr><td colspan="2" class="sub_headings">Current information</td></tr>
