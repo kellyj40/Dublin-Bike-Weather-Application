@@ -112,18 +112,3 @@ class database_queries:
             data.append([row[0], int(row[1]), int(row[2])])
         # print(data)
         return data
-
-
-
-        # creating
-    # def current_info_of_location(self, station_num):
-    #     cur = self.conn.cursor()
-    #     query_string = "SELECT * FROM Current_Data Where;"
-    #     cur.execute(query_string)
-    #     self.conn.commit()
-    #     data = {} #creating python dictionary to store the data for each stop number
-    #     for row in cur.fetchall():
-    #         data[str(row[0])] = list(row[1:])
-    #         data[str(row[0])][7] = int(datetime.datetime.fromtimestamp(int(time.time())-(data[str(row[0])][7]/1000)).strftime('%M'))
-    #     cur.close()
-    #     return data
