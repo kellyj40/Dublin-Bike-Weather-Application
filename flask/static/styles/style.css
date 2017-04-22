@@ -1,3 +1,6 @@
+/****Styles for both pages ****/
+
+/* Header */
 #heading{
     position:relative;
     height:30px;
@@ -12,6 +15,23 @@
     font-size:18px;
     color:white;
 }
+#weather {
+    position:absolute;
+    bottom:2px;
+    right: 190px;
+    font-family:Calibri;
+    font-weight: bold;
+    font-size:18px;
+    color:white;
+}
+#weather_icon{
+    position:absolute;
+    bottom:0;
+    height:30px;
+    right: 75px;
+}
+
+/* Home and info buttons */
 #home_button{
     position:absolute;
     border-radius: 30px;
@@ -44,30 +64,25 @@
     background-color:white;
     z-index:99;
 }
-h1{
-    font-family: Calibri;
-    display:inline;
-    margin-left: 30px;
-}
 body, html {
     margin:0;
     height: 100%;
     width: 100%;
     overflow:hidden;
 }
+
+/****Styles for index.html****/
+
 #wrapper{
     position:relative;
     height:100%;
     width:100%;
 }
-
-#name_of_stands{
-    text-transform: capitalize;
-}
 #home_map{
     width:100%;
     height:97.5%;
 }
+/* Dropdown menu for selecting location */
 #location_dropdown{
     position:absolute;
     top: 50px;
@@ -96,7 +111,7 @@ body, html {
     font-family: Calibri;
     font-weight:bold;
 }
-
+/* Table for displaying info for selected stop */
 #stop_info{
     border-radius:5px;
     background-color:white;
@@ -119,37 +134,7 @@ body, html {
 #stop_info_table .firstcol{
     text-align:right;
 }
-
-#weather {
-    position:absolute;
-    bottom:2px;
-    right: 190px;
-    font-family:Calibri;
-    font-weight: bold;
-    font-size:18px;
-    color:white;
-
-}
-#weather_icon{
-    position:absolute;
-    bottom:0;
-    height:30px;
-    right: 75px;
-}
-
-
-#current_chart {
-    padding-top: 15px;
-    float: left;
-    width:50%;
-    height:40%;
-}
-#char_2 {
-    padding-top: 10px;
-    float: left;
-    width:50%;
-    height:40%;
-    }
+/* Legend for marker meanings */
 #legend_table{
     font-family: Calibri;
     position: absolute;
@@ -166,55 +151,30 @@ body, html {
     height:30px;
     width:30px;
 }
+
+
+/**** Styles for dubikes.html ****/
+
+ /* Charts */
+#current_chart {
+    padding-top: 15px;
+    float: left;
+    width:50%;
+    height:40%;
+}
+#char_2 {
+    padding-top: 10px;
+    float: left;
+    width:50%;
+    height:40%;
+    }
+
 #historical_chart_week{
     float: left;
     width: 50%;
     display:none;
 }
-#location_map{
-    margin:0;
-    width:100%;
-    height:57.5%;
-}
-#nearby_table{
-    position: absolute;
-    top: 90px;
-    left: 20px;
-    background-color:white;
-    font-family: Calibri;
-    border-radius:10px;
-}
-#nearby_table th{
-    text-align:center;
-    background-color:#555555;
-    color:white;
-}
-#info_table{
-    position: absolute;
-    bottom: 70px;
-    left:365px;
-    font-family:Calibri;
-    font-size:13px;
-    background-color: none;
-    border: none;
-    z-index:99;
-}
-#info_table th{
-    background-color:#008CBA;
-    color:white;
-}
-#info_table .sub_headings{
-    font-weight:bold;
-    text-align: center;
-}
-
-#info_table .first_col_cells{
-    text-align: right;
-}
-#info_table .second_col_cells{
-    text-align: center;
-    width: 50px;
-}
+/* Chart buttons */
 #graph_buttons{
     padding-left: 125px;
 }
@@ -234,19 +194,68 @@ body, html {
     cursor:pointer;
     border:none;
     }
-#selected_location{
-    font-family: Calibri;
-    color:#555555;
-    top: 10px;
-    left:45%;
+/* Map */
+#location_map{
+    margin:0;
+    width:100%;
+    height:57.5%;
+}
+/* Nearest neighbour table */
+#nearby_table{
     position: absolute;
+    top: 90px;
+    left: 20px;
+    background-color:white;
+    font-family: Calibri;
+    border-radius:10px;
+}
+#nearby_table th{
+    text-align:center;
+    background-color:#555555;
+    color:white;
 }
 .nearest_neighbour_link{
     background-color: white;
     color: #008CBA;
     width: 50px ;
 }
-
 .detail_tags_info{
     color: #008CBA;
+}
+.name_of_stands{
+    text-transform: capitalize;
+}
+/* Table accompanying pie chart */
+#info_table{
+    position: absolute;
+    bottom: 70px;
+    left:365px;
+    font-family:Calibri;
+    font-size:13px;
+    background-color: none;
+    border: none;
+    z-index:99;
+}
+#info_table th{
+    background-color:#008CBA;
+    color:white;
+}
+#info_table .sub_headings{
+    font-weight:bold;
+    text-align: center;
+}
+#info_table .first_col_cells{
+    text-align: right;
+}
+#info_table .second_col_cells{
+    text-align: center;
+    width: 50px;
+}
+/* Location title */
+#selected_location{
+    font-family: Calibri;
+    color:#555555;
+    top: 10px;
+    left:45%;
+    position: absolute;
 }

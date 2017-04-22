@@ -44,7 +44,6 @@ class database_queries:
         #Get name and position of location
         query_string = "SELECT number, name, lat, lng FROM Static_Data WHERE number =  '{val}'".format(val=station_number)
         cur.execute(query_string)
-        #self.conn.commit()
         place = cur.fetchall()
         query_string = "SELECT number, name, lat, lng FROM Static_Data;"
         cur.execute(query_string)
@@ -53,7 +52,6 @@ class database_queries:
         #Get current data
         query_string = "SELECT * FROM Current_Data WHERE number =  '{val}'".format(val=station_number)
         cur.execute(query_string)
-        #self.conn.commit()
         data = {}  # creating python dictionary to store the data for each stop number
         row  = cur.fetchall()[0]
         data[str(row[0])] = list(row[1:])
@@ -84,7 +82,6 @@ class database_queries:
             data[str(row[0])] = list(row[1:])
             data[str(row[0])][4] = int(
                 datetime.datetime.fromtimestamp(int(time.time()) - (data[str(row[0])][4])).strftime('%M'))
-        # cur.close()
         return data
 
     def historical_data_day(self, station_number, day = None):
@@ -96,7 +93,6 @@ class database_queries:
         self.conn.commit()
         data = []
         for row in cur.fetchall():
-            # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
             data.append([row[0], int(row[1])])
         return data
 
@@ -108,7 +104,5 @@ class database_queries:
         self.conn.commit()
         data = []
         for row in cur.fetchall():
-            # data.append([datetime.datetime.fromtimestamp(int(row[8]/1000)).strftime('%Y-%m-%d %H:%M:%S.%f'),row[7]])
             data.append([row[0], int(row[1]), int(row[2])])
-        # print(data)
         return data

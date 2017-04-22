@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title id="name_of_stands">{{ name_of_place[1] }}</title>
+    <title class="name_of_stands">{{ name_of_place[1] }}</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -112,12 +112,12 @@
     </div>
     <table id="nearby_table">
         <tr><th colspan="2">Nearby stands</th></tr>
-        <tr><td colspan="2"><a href="/location?location2={{ neighbours[0][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[0][1] }} </span></a></td></tr>
-        <tr><td colspan="2"><a href="/location?location2={{ neighbours[1][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[1][1] }} </span></a></td></tr>
-        <tr><td colspan="2"><a href="/location?location2={{ neighbours[2][0] }}" class="nearest_neighbour_link"> <span id="name_of_stands"> {{ neighbours[2][1] }} </span></a></td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[0][0] }}" class="nearest_neighbour_link"> <span class="name_of_stands"> {{ neighbours[0][1] }} </span></a></td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[1][0] }}" class="nearest_neighbour_link"> <span class="name_of_stands"> {{ neighbours[1][1] }} </span></a></td></tr>
+        <tr><td colspan="2"><a href="/location?location2={{ neighbours[2][0] }}" class="nearest_neighbour_link"> <span class="name_of_stands"> {{ neighbours[2][1] }} </span></a></td></tr>
     </table>
     <table id="info_table">
-        <tr><td colspan="2" class="sub_headings">Current information</td></tr>
+        <tr><th colspan="2" class="sub_headings">Current information</th></tr>
         <tr><td class="first_col_cells">Total number of stands</td><td class="second_col_cells"> {{ all_data[4] }} </td></tr>
         <tr><td class="first_col_cells">Available bikes</td><td class="second_col_cells"> {{ all_data[6] }} </td></tr>
         <tr><td class="first_col_cells">Vacant stands</td><td class="second_col_cells"> {{ all_data[5] }} </td></tr>
@@ -207,8 +207,10 @@
             document.getElementById("daily_button").style.backgroundColor = '#008CBA';
             document.getElementById("weekly_button").style.backgroundColor = '#555555';
         }
+
         document.getElementById("info_button").addEventListener("mouseover", function() {document.getElementById("info_box").style.display='block'});
         document.getElementById("info_button").addEventListener("mouseout", function() {document.getElementById("info_box").style.display='none'});
+
         weather({{ weather | tojson }});
 
 </script>
