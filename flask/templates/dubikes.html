@@ -37,7 +37,7 @@
        var historicalOptions = {
           title: 'Historical '+days[date.getDay()]+' Occupancy',
           curveType: 'function',
-          legend: { position: 'bottom'},
+          legend: { position: 'top'},
           'width':600,
           'height':200,
           vAxis: {
@@ -47,8 +47,8 @@
             },
           hAxis: {
             title: 'Time (0-23)',
-            viewWindow:{min:0},
             ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
             }
         };
         var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart'));
