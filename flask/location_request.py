@@ -1,6 +1,9 @@
+# this script is not used in the final project
 from sqlalchemy import create_engine
 from pandas import DataFrame
 import datetime
+
+
 import pymysql
 
 

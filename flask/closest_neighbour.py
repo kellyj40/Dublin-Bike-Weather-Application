@@ -24,12 +24,12 @@ def find_closest_neighbours(place, neighbours):
                 details_neighbour[2] = details_neighbour[1]
                 details_neighbour[1] = details_neighbour[0]
                 details_neighbour[0] = location
-            elif d<closest2:
+            elif d < closest2:
                 closest3 = closest2
                 closest2 = d
                 details_neighbour[2] = details_neighbour[1]
                 details_neighbour[1] = location
-            elif d<closest3:
+            elif d < closest3:
                 closest3 = d
                 details_neighbour[2] = location
     
