@@ -136,6 +136,8 @@ body, html {
     height:30px;
     right: 75px;
 }
+
+
 #current_chart {
     padding-top: 15px;
     float: left;
@@ -190,10 +192,10 @@ body, html {
 #info_table{
     position: absolute;
     bottom: 70px;
-    left:320px;
+    left:365px;
     font-family:Calibri;
     font-size:13px;
-    background-color:white;
+    background-color: none;
     border: none;
     z-index:99;
 }

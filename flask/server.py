@@ -26,11 +26,12 @@ def location_selection():
     historical_data_day = db_queries_locations.historical_data_day(number_of_station, day)
     historical_data_week = db_queries_locations.historical_data_week(number_of_station)
     name_of_place = list(name_of_place)
+    weather = db_queries_locations.weather_info()
     for i in range(len(name_of_place)):
         name_of_place[i]=str(name_of_place[i]).title() #converting place names to camel case
     return render_template('dubikes.html', name_of_place=name_of_place, all_data=all_data,
                            neighbours=neighbours, historical_data_day=historical_data_day,
-                           historical_data_week=historical_data_week)
+                           historical_data_week=historical_data_week, weather=weather)
 
 if __name__ == "__main__":
     app.run(debug=True)

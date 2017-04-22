@@ -202,7 +202,9 @@
         }
         document.getElementById("info_button").addEventListener("mouseover", function() {document.getElementById("info_box").style.display='block'});
         document.getElementById("info_button").addEventListener("mouseout", function() {document.getElementById("info_box").style.display='none'});
-    </script>
+        weather({{ weather | tojson }});
+
+</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN7EfuGN0aiw97d-KPFwWCBDF6GJjRDDM&callback=googleMap"></script>
 
 </body>
