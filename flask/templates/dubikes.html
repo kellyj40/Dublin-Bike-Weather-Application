@@ -17,7 +17,8 @@
 
         var currentOptions = {
           title: '{{ name_of_place[1] }} Current Occupancy',
-          is3D: true
+          is3D: true,
+          colors: ['#555555','#008CBA']
         };
 
         var currentChart = new google.visualization.PieChart(document.getElementById('current_chart'));
@@ -49,7 +50,8 @@
             title: 'Time (0-23)',
             ticks: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 
-            }
+            },
+            colors: ['#008CBA']
         };
         var historicalChart = new google.visualization.LineChart(document.getElementById('historical_chart'));
         historicalChart.draw(historicalData, historicalOptions);
@@ -78,13 +80,14 @@
 
     var options = {
       title : 'Average Availability by Day',
-     'width':600,
+     'width':560,
      'height':200,
       vAxis: {title: 'Available'},
       hAxis: {title: 'Day'},
       seriesType: 'bars',
       series: {2: {type: 'line'}
-      }
+      },
+      colors: ['#008CBA','#555555']
     };
 
     var chart = new google.visualization.ComboChart(document.getElementById('historical_chart_week'));
